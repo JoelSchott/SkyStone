@@ -1,0 +1,43 @@
+Gamepad 1---------------------------------------------------------------------------
+
+left joystick y --------- driving forward/backward
+left joystick x --------- strafing left/right
+left joystick button ----
+right joystick y --------
+right joystick x -------- left is turning counterclockwise, right is turning clockwise
+right joystick button ---
+a ----------------------- switches to field-relative drive
+b ----------------------- switches to robot-relative drive
+x ----------------------- switches to full speed mode
+y ----------------------- switches to slow mode
+left bumper (higher up) - left arm up
+right bumper (higher up)- right arm up
+left trigger ------------ left arm down
+right trigger ----------- right arm down
+D-pad left -------------- sets angle to 180 degrees for field-relative drive
+D-pad bottom ------------ sets angle to 270 degrees for field-relative drive
+D-pad right ------------- sets angle to 0 degrees for field-relative drive
+D-pad top --------------- sets angle to 90 degrees for field-relative drive
+
+
+Gamepad 2---------------------------------------------------------------------------
+
+left joystick y ---------- foundation mover up/down
+left joystick x ---------
+left joystick button ----
+right joystick y -------- lift up / down
+right joystick x --------
+right joystick button ---
+a  ---------------------- collects
+b  ---------------------- spews
+x  ---------------------- toggle clamp/unclamp of block
+y ----------------------- raises/lowers lift to position
+left bumper (higher up) - capstone servo back in
+right bumper (higher up)- placing capstone
+left trigger ------------ fine-tune rotator in
+right trigger ----------- fine-turn rotator out
+D-pad left -------------- rotator to in position
+D-pad bottom ------------ counts the level one lower
+D-pad right ------------- rotator to out position
+D-pad top --------------- counts the level one highter
+
