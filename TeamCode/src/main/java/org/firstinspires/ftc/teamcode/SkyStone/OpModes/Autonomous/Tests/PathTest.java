@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode.SkyStone.OpModes.Autonomous.Tests;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.SkyStone.MainBase;
+import org.firstinspires.ftc.teamcode.Sky_Stone_Components.FourWheelMecanum;
 
-//@Autonomous (name = "Path Test")
+@Autonomous(name = "Path Test", group = "Autonomous")
 public class PathTest extends LinearOpMode {
 
     MainBase base;
@@ -25,10 +27,12 @@ public class PathTest extends LinearOpMode {
         telemetry.update();
 
         base.drivetrain.setInitalAngle(0);
+        double initialAngle = base.gyro.gyro.getIntegratedZValue();
 
         waitForStart();
 
-        base.drivetrain.encoderDrive(0.8, 20, 40, 9);
+        base.drivetrain.encoderDrive(0.5, FourWheelMecanum.Direction.LEFT, 20, 9);
+        base.drivetrain.gyroEncoderDrive(0.5, 0, -20, initialAngle);
 
     }
 

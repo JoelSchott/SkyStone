@@ -278,7 +278,7 @@ public class FourWheelMecanum extends RobotComponent {
 
         //2.5253 is about 2arctan(pi)
         double c = (maxSpeed - minSpeed)/2.5253;
-        double theta = 60;
+        double theta = 30;
         double d = (2*3.1416/theta);
         double addition = (maxSpeed + minSpeed)/2.0;
         while (absoluteError > 1 && runTime.seconds() < timeOut && base().getOpMode().opModeIsActive()){
@@ -528,7 +528,8 @@ public class FourWheelMecanum extends RobotComponent {
         backLeft.setPower(speed);
         backRight.setPower(speed);
 
-        while (base.getOpMode().opModeIsActive() && frontLeft.isBusy() && frontRight.isBusy() && backLeft.isBusy() && backRight.isBusy()){
+        int busyMotors = 4;
+        while (base.getOpMode().opModeIsActive() && busyMotors > 1){
             double error = angle - gyro.gyro.getIntegratedZValue();
             while (error > 180){
                 error -= 360;
@@ -537,7 +538,7 @@ public class FourWheelMecanum extends RobotComponent {
                 error += 360;
             }
 
-            double steer = Range.clip(error * 0.1, -1.0, 1.0);
+            double steer = Range.clip(error * 0.04, -1.0, 1.0);
 
 
             double minusSteerSpeed = speed - steer;
@@ -550,51 +551,76 @@ public class FourWheelMecanum extends RobotComponent {
                 plusSteerSpeed /= max;
             }
 
-            if (frontRight.getTargetPosition() > frontRight.getCurrentPosition()){
-                frontRight.setPower(plusSteerSpeed);
-            }
-            else{
-                frontRight.setPower(minusSteerSpeed);
-            }
-            if (backRight.getTargetPosition() > backRight.getCurrentPosition()){
-                backRight.setPower(plusSteerSpeed);
-            }
-            else{
-                backRight.setPower(minusSteerSpeed);
-            }
-
-            if (frontLeft.getTargetPosition() > frontLeft.getCurrentPosition()){
-                frontLeft.setPower(minusSteerSpeed);
-            }
-            else{
-                frontLeft.setPower(plusSteerSpeed);
-            }
-            if (backLeft.getTargetPosition() > backLeft.getCurrentPosition()){
-                backLeft.setPower(minusSteerSpeed);
-            }
-            else{
-                backLeft.setPower(plusSteerSpeed);
-            }
-
             double sumEncoderError = Math.abs(frontLeft.getCurrentPosition() - frontLeft.getTargetPosition())+
                     Math.abs(backLeft.getCurrentPosition() - backLeft.getTargetPosition()) +
                     Math.abs(frontRight.getCurrentPosition() - frontRight.getTargetPosition()) +
                             Math.abs(backRight.getCurrentPosition() - backRight.getTargetPosition());
             double sumInchesError = sumEncoderError / COUNTS_PER_INCH;
-            if (sumInchesError < 2){
+
+            if (sumInchesError < 0.7){
                 break;
             }
+            else if (sumInchesError > 6){
+                if (frontRight.getTargetPosition() > frontRight.getCurrentPosition()){
+                    frontRight.setPower(plusSteerSpeed);
+                }
+                else{
+                    frontRight.setPower(minusSteerSpeed);
+                }
+                if (backRight.getTargetPosition() > backRight.getCurrentPosition()){
+                    backRight.setPower(plusSteerSpeed);
+                }
+                else{
+                    backRight.setPower(minusSteerSpeed);
+                }
 
+                if (frontLeft.getTargetPosition() > frontLeft.getCurrentPosition()){
+                    frontLeft.setPower(minusSteerSpeed);
+                }
+                else{
+                    frontLeft.setPower(plusSteerSpeed);
+                }
+                if (backLeft.getTargetPosition() > backLeft.getCurrentPosition()){
+                    backLeft.setPower(minusSteerSpeed);
+                }
+                else{
+                    backLeft.setPower(plusSteerSpeed);
+                }
+            }
+            else{
+                frontLeft.setPower(speed);
+                frontRight.setPower(speed);
+                backLeft.setPower(speed);
+                backRight.setPower(speed);
+            }
+
+            busyMotors = 0;
+            if (frontLeft.isBusy()){
+                busyMotors ++;
+            }
+            if (backLeft.isBusy()){
+                busyMotors++;
+            }
+            if (frontRight.isBusy()){
+                busyMotors++;
+            }
+            if(backRight.isBusy()){
+                busyMotors++;
+            }
             // Display drive status for the driver.
-            base.getTelemetry().addData("Err/St",  "%5.1f/%5.1f",  error, steer);
-            base.getTelemetry().addData("Target",  "%7d:%7d",      frontLeftCounts,  frontRightCounts);
-            base.getTelemetry().addData("Actual",  "%7d:%7d",      frontLeft.getCurrentPosition(),
-                    frontRight.getCurrentPosition());
-            base.getTelemetry().addData("Speed",   "%5.2f:%5.2f",  minusSteerSpeed, plusSteerSpeed);
+            base.getTelemetry().addData("steer is " , steer);
+            base.getTelemetry().addData("Angle is ",  angle);
+            base.getTelemetry().addData("Current is ", gyro.gyro.getIntegratedZValue());
+            base.getTelemetry().addLine("front Left " + frontLeft.getPower());
+            base.getTelemetry().addLine("front Right " + frontRight.getPower());
+            base.getTelemetry().addLine("back Left " + backLeft.getPower());
+            base.getTelemetry().addLine("back right " + backRight.getPower());
             base.getTelemetry().update();
 
         }
+        stop();
         setModes(DcMotor.RunMode.RUN_USING_ENCODER);
+
     }
 
 
