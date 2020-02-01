@@ -19,36 +19,38 @@ import java.util.List;
 @Autonomous(name = "Red Double Stone Encoders", group = "Autonomous")
 public class RedDoubleStoneEncoders extends LinearOpMode {
 
-    private MainBaseWebcam base;
+    public MainBaseWebcam base;
 
-    private final static double DRIVE_SPEED = 1.0;
-    private static final double MAX_TURN_SPEED = 0.5;
-    private final static double MINIMUM_TURN_SPEED = 0.1;
-    private final static double DISTANCE_ADJUSTMENT_SPEED = 0.15;
+    public final static double DRIVE_SPEED = 1.0;
+    public static final double MAX_TURN_SPEED = 0.5;
+    public final static double MINIMUM_TURN_SPEED = 0.1;
+    public final static double DISTANCE_ADJUSTMENT_SPEED = 0.15;
 
-    private final static double FIRST_DISTANCE = 26.80;
-    private final static double FIRST_LEFT_DISTANCE = 16.84;
-    private static final double COLLECTING_DISTANCE = 27.33;
+    public final static double FIRST_DISTANCE = 26.80;
+    public final static double FIRST_LEFT_DISTANCE = 16.84;
+    public static final double COLLECTING_DISTANCE = 27.33;
 
-    private static final double LEFT_BRIDGE_DISTANCE = 40;
-    private static final double MIDDLE_BRIDGE_DISTANCE = 32;
-    private static final double RIGHT_BRIDGE_DISTANCE =  24;
+    public static final double LEFT_BRIDGE_DISTANCE = 56;
+    public static final double MIDDLE_BRIDGE_DISTANCE = 48;
+    public static final double RIGHT_BRIDGE_DISTANCE =  40;
 
-    private static final double LEFT_FIRST_DISTANCE_TO_WALL = 20.86;
-    private static final double LEFT_SECOND_DISTANCE_TO_WALL = 1.32;
+    public static final double LEFT_FIRST_DISTANCE_TO_WALL = 20.86;
+    public static final double LEFT_SECOND_DISTANCE_TO_WALL = 1.32;
 
-    private static final double MIDDLE_FIRST_DISTANCE_TO_WALL = 27;
-    private static final double MIDDLE_SECOND_DISTANCE_TO_WALL = 8.2;
+    public static final double MIDDLE_FIRST_DISTANCE_TO_WALL = 27.7;
+    public static final double MIDDLE_SECOND_DISTANCE_TO_WALL = 8.2;
 
-    private static final double RIGHT_FIRST_DISTANCE_TO_WALL = 34.4;
-    private static final double RIGHT_SECOND_DISTANCE_TO_WALL = 14.3;
+    public static final double RIGHT_FIRST_DISTANCE_TO_WALL = 34.4;
+    public static final double RIGHT_SECOND_DISTANCE_TO_WALL = 14.3;
 
-    private static final double AROUND_GATE_DISTANCE = 13;
-    private static final double RIGHT_PARKING_DISTANCE = 5;
-    private static final double PARKING_DISTANCE = 15;
+    public static final double AROUND_GATE_DISTANCE = 13;
+    public static final double RIGHT_PARKING_DISTANCE = 5;
+    public static final double PARKING_DISTANCE = 15;
 
 
     private CustomPhoneCameraSkyStone.SkyStonePosition position = CustomPhoneCameraSkyStone.SkyStonePosition.UNKNOWN;
+
+    public int initialAngle;
 
     @Override
     public void runOpMode(){
@@ -57,7 +59,7 @@ public class RedDoubleStoneEncoders extends LinearOpMode {
         base.init();
 
         base.drivetrain.setInitalAngle(180);
-        int initialAngle = base.gyro.gyro.getIntegratedZValue();
+        initialAngle = base.gyro.gyro.getIntegratedZValue();
 
         telemetry.clearAll();
         telemetry.addLine("May the Force be with us");
@@ -68,7 +70,8 @@ public class RedDoubleStoneEncoders extends LinearOpMode {
             telemetry.update();
         }
 
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, 10.5, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, 14, initialAngle);
+        straightenOut();
 
         base.getTelemetry().addData("front distance is ", base.frontRange.customDistanceInInches());
         base.getTelemetry().addData("left distance is ", base.leftRange.customDistanceInInches());
@@ -83,9 +86,7 @@ public class RedDoubleStoneEncoders extends LinearOpMode {
 
         List<Recognition> stones = base.webcam.getObjects();
         position = CustomPhoneCameraSkyStone.REDTwoStonesGetPosition(stones);
-        if (position == CustomPhoneCameraSkyStone.SkyStonePosition.UNKNOWN){
-            position = CustomPhoneCameraSkyStone.SkyStonePosition.MIDDLE;
-        }
+
 
         for (Recognition stone : stones){
             double midPoint = (stone.getRight() + stone.getLeft())/2.0;
@@ -95,11 +96,17 @@ public class RedDoubleStoneEncoders extends LinearOpMode {
         telemetry.addData("Position is ",  position);
         telemetry.update();
 
+        if (position == CustomPhoneCameraSkyStone.SkyStonePosition.UNKNOWN){
+            position = CustomPhoneCameraSkyStone.SkyStonePosition.LEFT;
+        }
+
         switch(position){
             case LEFT:
 
                 //drives forward and right after seeing stones
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 4, 14, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10.5, 12.5, initialAngle);
+
+                straightenOut();
 
                 //drives to specific distance from both walls
                 frontRangeDriveToDistance(LEFT_FIRST_DISTANCE_TO_WALL);
@@ -110,13 +117,17 @@ public class RedDoubleStoneEncoders extends LinearOpMode {
                 //drive left to go to building zone
                 base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, -AROUND_GATE_DISTANCE, initialAngle);
 
+                straightenOut();
+
                 //drive to other zone
                 base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -LEFT_BRIDGE_DISTANCE, 0, initialAngle);
 
                 releaseBlock();
 
                 //drives to second stone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -(LEFT_BRIDGE_DISTANCE + 16), AROUND_GATE_DISTANCE - 1.5, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, (LEFT_BRIDGE_DISTANCE + 22), AROUND_GATE_DISTANCE - 1, initialAngle);
+
+                straightenOut();
 
                 //drives to distance from both walls
                 frontRangeDriveToDistance(LEFT_SECOND_DISTANCE_TO_WALL);
@@ -129,11 +140,15 @@ public class RedDoubleStoneEncoders extends LinearOpMode {
                 //drives left to go to building zone
                 base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, -AROUND_GATE_DISTANCE, initialAngle);
 
+                straightenOut();
+
                 //drives back to go to other zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -(LEFT_BRIDGE_DISTANCE + 18), 0, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -(LEFT_BRIDGE_DISTANCE + 19), 0, initialAngle);
+
+                getThirdStoneLeft();
 
                 //turns to face gate side of line
-                base.drivetrain.gyroTurn(MINIMUM_TURN_SPEED, MAX_TURN_SPEED, 160, 5);
+                base.drivetrain.gyroTurn(0.3, MAX_TURN_SPEED, 150, 5);
 
                 //releases and parks
                 base.arms.setRightPosition(0.1);
@@ -144,7 +159,9 @@ public class RedDoubleStoneEncoders extends LinearOpMode {
             case MIDDLE:
 
                 //strafes right next to the stones
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, 14, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 2, 12.5, initialAngle);
+
+                straightenOut();
 
                 //drives to specific distance from both walls
                 frontRangeDriveToDistance(MIDDLE_FIRST_DISTANCE_TO_WALL);
@@ -155,13 +172,17 @@ public class RedDoubleStoneEncoders extends LinearOpMode {
                 //drive left to go to building zone
                 base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, -AROUND_GATE_DISTANCE, initialAngle);
 
+                straightenOut();
+
                 //drive to other zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -MIDDLE_BRIDGE_DISTANCE, 0, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -MIDDLE_BRIDGE_DISTANCE - 4, 0, initialAngle);
 
                 releaseBlock();
 
                 //drives to second stone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, MIDDLE_BRIDGE_DISTANCE + 16, AROUND_GATE_DISTANCE - 1, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, MIDDLE_BRIDGE_DISTANCE + 26, AROUND_GATE_DISTANCE - 1, initialAngle);
+
+                straightenOut();
 
                 //drives to distance from both walls
                 frontRangeDriveToDistance(MIDDLE_SECOND_DISTANCE_TO_WALL);
@@ -172,23 +193,29 @@ public class RedDoubleStoneEncoders extends LinearOpMode {
                 //drives left to go to building zone
                 base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, -AROUND_GATE_DISTANCE, initialAngle);
 
+                straightenOut();
+
                 //drives back to go to other zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -(MIDDLE_BRIDGE_DISTANCE + 16), 0, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -(MIDDLE_BRIDGE_DISTANCE + 28), 0, initialAngle);
+
+                getThirdStoneMiddle();
 
                 //turns to face gate side of line
-                base.drivetrain.gyroTurn(MINIMUM_TURN_SPEED, MAX_TURN_SPEED, 160, 5);
+                base.drivetrain.gyroTurn(0.3, MAX_TURN_SPEED, 150, 5);
 
                 releaseBlock();
 
                 //park
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, 0, base.gyro.gyro.getIntegratedZValue());
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 15, 0, base.gyro.gyro.getIntegratedZValue());
 
                 break;
 
             case RIGHT:
 
                 //drives back and right after seeing stones
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -4.5, 14, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -7, 14.2, initialAngle);
+
+                straightenOut();
 
                 //drives to specific distance from both walls
                 frontRangeDriveToDistance(RIGHT_FIRST_DISTANCE_TO_WALL);
@@ -199,13 +226,17 @@ public class RedDoubleStoneEncoders extends LinearOpMode {
                 //drive left to go to building zone
                 base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, -AROUND_GATE_DISTANCE, initialAngle);
 
+                straightenOut();
+
                 //drive to other zone
                 base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, - RIGHT_BRIDGE_DISTANCE,0, initialAngle);
 
                 releaseBlock();
 
                 //drives to second stone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, RIGHT_BRIDGE_DISTANCE + 16, AROUND_GATE_DISTANCE - 3, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, RIGHT_BRIDGE_DISTANCE + 19, AROUND_GATE_DISTANCE - 5, initialAngle);
+
+                straightenOut();
 
                 //drives to distance from both walls
                 frontRangeDriveToDistance(RIGHT_SECOND_DISTANCE_TO_WALL);
@@ -216,8 +247,12 @@ public class RedDoubleStoneEncoders extends LinearOpMode {
                 //drives left to go to building zone
                 base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, -AROUND_GATE_DISTANCE, initialAngle);
 
+                straightenOut();
+
                 //drives back to go to other zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -(RIGHT_BRIDGE_DISTANCE + 18), 0, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -(RIGHT_BRIDGE_DISTANCE + 23), 0, initialAngle);
+
+                getThirdStoneRight();
 
                 //turns to face gate side of line
                 base.drivetrain.gyroTurn(MINIMUM_TURN_SPEED, MAX_TURN_SPEED, 160, 5);
@@ -242,7 +277,14 @@ public class RedDoubleStoneEncoders extends LinearOpMode {
             FileOutputStream outputStream = new FileOutputStream(file);
             PrintStream printStream = new PrintStream(outputStream);
             printStream.flush();
-            printStream.println(base.gyro.heading());
+            int angle = base.gyro.heading() - 180;
+            while (angle > 360){
+                angle -= 360;
+            }
+            while (angle < 0){
+                angle += 360;
+            }
+            printStream.println(angle);
             printStream.close();
             outputStream.close();
         }
@@ -254,21 +296,25 @@ public class RedDoubleStoneEncoders extends LinearOpMode {
 
     }
 
-    private void frontRangeDriveToDistance(double distance){
+    public void straightenOut(){
+        base.drivetrain.gyroTurn(0.2, 0.8, 180, 2);
+    }
+
+    public void frontRangeDriveToDistance(double distance){
         double error = Math.abs(base.frontRange.customDistanceInInches() - distance);
-        double buffer = 1.5;
-        if (base.frontRange.distance(DistanceUnit.INCH) < 0 || error > 20){
+        double buffer = 0.8;
+        if (base.frontRange.distance(DistanceUnit.INCH) < 0 || error > 10){
             return;
         }
         if (error > buffer){
             if (base.frontRange.customDistanceInInches() > distance){
-                while (error > buffer){
+                while (error > buffer && error < 10){
                     base.drivetrain.setPowers(DISTANCE_ADJUSTMENT_SPEED);
                     error = Math.abs(base.frontRange.customDistanceInInches() - distance);
                 }
             }
             else if (base.frontRange.customDistanceInInches() < distance){
-                while (error > buffer){
+                while (error > buffer && error < 10){
                     base.drivetrain.setPowers(-DISTANCE_ADJUSTMENT_SPEED);
                     error =  Math.abs(base.frontRange.customDistanceInInches() - distance);
                 }
@@ -276,9 +322,9 @@ public class RedDoubleStoneEncoders extends LinearOpMode {
         }
     }
 
-    private void leftRangeDriveToDistance(double distance){
+    public void leftRangeDriveToDistance(double distance){
         double error = Math.abs(base.leftRange.customDistanceInInches() - distance);
-        double buffer = 1.5;
+        double buffer = 0.8;
         if (base.leftRange.distance(DistanceUnit.INCH) < 0 || error > 20){
             return;
         }
@@ -295,13 +341,17 @@ public class RedDoubleStoneEncoders extends LinearOpMode {
         }
     }
 
-    private void grabBlock(){
+    public void grabBlock(){
         base.arms.setRightPosition(0.75);
         sleep(300);
     }
 
-    private void releaseBlock(){
+    public void releaseBlock(){
         base.arms.setRightPosition(0.1);
         sleep(300);
     }
+
+    public void getThirdStoneLeft(){ }
+    public void getThirdStoneMiddle(){}
+    public void getThirdStoneRight(){}
 }

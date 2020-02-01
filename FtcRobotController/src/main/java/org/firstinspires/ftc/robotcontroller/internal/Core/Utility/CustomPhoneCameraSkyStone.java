@@ -110,6 +110,7 @@ public class CustomPhoneCameraSkyStone {
                 return SkyStonePosition.MIDDLE;
             }
         }
+
         if (stones.size() < 2){
             return SkyStonePosition.UNKNOWN;
         }
@@ -214,6 +215,15 @@ public class CustomPhoneCameraSkyStone {
     public static CustomPhoneCameraSkyStone.SkyStonePosition BLUETwoStonesGetPosition(List<Recognition> stones){
         if (stones == null){
             return SkyStonePosition.UNKNOWN;
+        }
+        for (Recognition stone : stones){
+            double midPoint = (stone.getLeft() + stone.getRight())/2.0;
+            if (stone.getLabel().equals("Skystone") && stone.getConfidence() > 0.73 && midPoint > 400){
+                return SkyStonePosition.MIDDLE;
+            }
+            else if (stone.getLabel().equals("Skystone") && stone.getConfidence() > 0.73 && midPoint < 400){
+                return SkyStonePosition.LEFT;
+            }
         }
         if (stones.size() < 2){
             return SkyStonePosition.UNKNOWN;

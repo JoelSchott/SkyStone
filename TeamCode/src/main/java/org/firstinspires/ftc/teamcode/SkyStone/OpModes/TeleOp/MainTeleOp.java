@@ -146,7 +146,7 @@ public class MainTeleOp extends LinearOpMode {
                 base.collector.collect(0.78);
             }
             else if (gamepad2.b){
-                base.collector.spew(1);
+                base.collector.spew(0.25);
             }
             else{
                 base.collector.stop();
@@ -280,7 +280,6 @@ public class MainTeleOp extends LinearOpMode {
             telemetry.addData("DRIVE STATE :", driveState);
             telemetry.addData("DRIVE MODE :", driveMode);
             telemetry.addLine();
-            telemetry.addData("left range is ", base.leftRange.customDistanceInInches());
             telemetry.addData("TOWER LEVEL IS ", towerLevel);
             telemetry.addLine();
             telemetry.addData("front distance ", base.frontRange.customDistanceInInches());
@@ -299,7 +298,9 @@ public class MainTeleOp extends LinearOpMode {
             File file = new File(Environment.getExternalStorageDirectory(), "angle");
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line = br.readLine();
-            int angle = Integer.getInteger(line);
+            telemetry.addLine("line is " + line);
+            telemetry.update();
+            int angle = Integer.parseInt(line);
             base.drivetrain.setInitalAngle(angle);
             br.close();
             telemetry.addData("Successfully set angle to ", angle);
@@ -307,8 +308,8 @@ public class MainTeleOp extends LinearOpMode {
         }
         catch(Exception e){
             telemetry.addLine("problem with i/o");
+            telemetry.addLine(e.getMessage());
             telemetry.update();
-            e.printStackTrace();
         }
     }
 }

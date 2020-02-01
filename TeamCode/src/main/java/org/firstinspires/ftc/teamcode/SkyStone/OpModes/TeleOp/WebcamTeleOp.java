@@ -138,7 +138,8 @@ public class WebcamTeleOp extends LinearOpMode {
                 showLeft = false;
             }
             telemetry.addData("Show left is ", showLeft);
-            telemetry.addData("conclusion is ", CustomPhoneCameraSkyStone.REDTwoStonesGetPosition(base.webcam.getObjects()));
+            telemetry.addData("red conclusion is ", CustomPhoneCameraSkyStone.REDTwoStonesGetPosition(base.webcam.getObjects()));
+            telemetry.addData("blue conclusion is ", CustomPhoneCameraSkyStone.BLUETwoStonesGetPosition(base.webcam.getObjects()));
 
             if (showLeft){
                 for (Recognition stone : base.webcam.getObjects()){

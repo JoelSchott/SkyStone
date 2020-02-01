@@ -1,11 +1,12 @@
 package org.firstinspires.ftc.teamcode.SkyStone.OpModes.Autonomous.Competition.Red;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.Sky_Stone_Components.FourWheelMecanum;
 import org.firstinspires.ftc.teamcode.SkyStone.MainBase;
 
-//@Autonomous(name = "Red Foundation Bridge", group = "Autonomous")
+@Autonomous(name = "Red Foundation Bridge", group = "Autonomous")
 public class RedFoundationBridge extends LinearOpMode {
 
     private MainBase base;
@@ -21,44 +22,54 @@ public class RedFoundationBridge extends LinearOpMode {
         base.init();
         base.drivetrain.setInitalAngle(180);
 
+        double initialAngle = base.gyro.gyro.getIntegratedZValue();
+
         waitForStart();
 
         //strafe back and right to get in front of foundation
-        base.drivetrain.encoderDrive(DRIVE_SPEED, FourWheelMecanum.Direction.BACK_RIGHT, 24, 5);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -15, 15, initialAngle);
 
-        //rotates to starting angle
-        base.drivetrain.gyroTurn(0.1,0.7, 180, 2);
+        straightenOut();
 
         //strafes right to foundation
-        base.drivetrain.encoderDrive(DRIVE_SPEED, FourWheelMecanum.Direction.RIGHT, 26, 5);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, 8, initialAngle);
+
+        straightenOut();
 
         //slowly strafes flush to foundation
-        base.drivetrain.encoderDrive(0.3, FourWheelMecanum.Direction.RIGHT, 6, 5);
+        base.drivetrain.gyroEncoderDrive(0.3, 0, 8, initialAngle);
 
         //grabs foundation
-        base.foundation.moveServo(1);
+        base.foundation.moveServo(-1);
         sleep(750);
 
+
         //strafes forward and left
-        base.drivetrain.encoderDrive(DRIVE_SPEED, FourWheelMecanum.Direction.FORWARD_LEFT, 24, 5);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 15, -5, initialAngle);
 
         //turns with foundation
-        base.drivetrain.gyroTurn(0.1, 0.5, 90, 5);
+        base.drivetrain.gyroTurn(0.1, 0.7, 90, 5);
 
         //places foundation in corner
-        base.drivetrain.encoderDrive(DRIVE_SPEED, FourWheelMecanum.Direction.BACK_RIGHT, 12, 4);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -2, 15, base.gyro.gyro.getIntegratedZValue());
 
         //lets go of foundation
-        base.foundation.moveServo(-1);
+        base.foundation.moveServo(1);
         sleep(500);
         base.foundation.moveServo(0);
 
-        //drives forward and left for parking near bridge
-        base.drivetrain.encoderDrive(DRIVE_SPEED, FourWheelMecanum.Direction.FORWARD_LEFT, 20, 5);
+        //drives back for parking
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -5.5, 0, base.gyro.gyro.getIntegratedZValue());
 
-        //strafes left to park near bridge
-        base.drivetrain.encoderDrive(DRIVE_SPEED, FourWheelMecanum.Direction.LEFT, 20, 5);
+        //drives left for parking near bridge
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -3, -37, base.gyro.gyro.getIntegratedZValue());
 
+    }
+
+    private void straightenOut(){
+        base.drivetrain.gyroTurn(0.25, 0.4, 180, 0.45);
+        telemetry.addData("Angle is ", base.gyro.heading());
+        telemetry.update();
     }
 
 

@@ -31,8 +31,8 @@ public class PathTest extends LinearOpMode {
 
         waitForStart();
 
-        base.drivetrain.encoderDrive(0.5, FourWheelMecanum.Direction.LEFT, 20, 9);
-        base.drivetrain.gyroEncoderDrive(0.5, 0, -20, initialAngle);
+        base.drivetrain.gyroEncoderDrive(1, 40, 20, initialAngle);
+        base.drivetrain.gyroEncoderDrive(1, 0, -20, initialAngle);
 
     }
 

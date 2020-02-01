@@ -10,7 +10,7 @@ import org.firstinspires.ftc.teamcode.SkyStone.MainBaseWebcam;
 
 import java.util.List;
 
-@Autonomous(name = "Red Double Stone Arms", group = "Autonomous")
+//@Autonomous(name = "Red Double Stone Arms", group = "Autonomous")
 public class RedDoubleStoneArms extends LinearOpMode {
 
     private MainBaseWebcam base;

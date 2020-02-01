@@ -13,7 +13,7 @@ public class Output extends RobotComponent {
     public Servo marker;
 
     private double rotatorInPosition = 0.09;
-    private double rotatorOutPosition = 0.97;
+    private double rotatorOutPosition = 0.99;
 
     public Output (RobotBase base){
         super(base);
