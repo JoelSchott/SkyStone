@@ -39,7 +39,7 @@ public class BlueDoubleStoneEncoders extends LinearOpMode {
     public static final double RIGHT_SECOND_DISTANCE_TO_WALL = 1.71;
 
     public static final double MIDDLE_FIRST_DISTANCE_TO_WALL = 29.2;
-    public static final double MIDDLE_SECOND_DISTANCE_TO_WALL = 9;
+    public static final double MIDDLE_SECOND_DISTANCE_TO_WALL = 8;
 
     public static final double LEFT_FIRST_DISTANCE_TO_WALL = 35.64;
     public static final double LEFT_SECOND_DISTANCE_TO_WALL = 14.8;
@@ -68,6 +68,8 @@ public class BlueDoubleStoneEncoders extends LinearOpMode {
         base.init();
 
         base.drivetrain.setInitalAngle(0);
+
+        base.gyro.gyro.resetZAxisIntegrator();
         initialAngle = base.gyro.gyro.getIntegratedZValue();
 
         telemetry.clearAll();
@@ -96,11 +98,10 @@ public class BlueDoubleStoneEncoders extends LinearOpMode {
         telemetry.addLine("May the Force be with us");
         telemetry.update();
 
-        while (!opModeIsActive()){
-            telemetry.addData("front distance should be ", FIRST_DISTANCE);
-            telemetry.addData("front distance is ", base.frontRange.customDistanceInInches());
-            telemetry.update();
-        }
+        waitForStart();
+
+        base.gyro.gyro.resetZAxisIntegrator();
+
         log("initialPosition");
 
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, -15.5, initialAngle);
@@ -169,7 +170,7 @@ public class BlueDoubleStoneEncoders extends LinearOpMode {
                 log("leftReleaseFirstStone");
 
                 //drives to second stone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, LEFT_BRIDGE_DISTANCE + 25, -9, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, LEFT_BRIDGE_DISTANCE + 25, -6.6, initialAngle);
                 log("leftSecondStoneEncoders");
 
                 straightenOut();
@@ -183,7 +184,7 @@ public class BlueDoubleStoneEncoders extends LinearOpMode {
                 grabBlock();
 
                 //drives right to go to building zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, 13, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, 14.3, initialAngle);
                 log("leftSecondStoneStrafeRight");
 
                 straightenOut();
@@ -209,7 +210,7 @@ public class BlueDoubleStoneEncoders extends LinearOpMode {
             case MIDDLE:
 
                 //drives back after seeing stones
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -5, -12, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -2.5, -12, initialAngle);
 
                 straightenOut();
 
@@ -232,7 +233,7 @@ public class BlueDoubleStoneEncoders extends LinearOpMode {
                 straightenOut();
 
                 //drives to second stone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, MIDDLE_BRIDGE_DISTANCE + 24, -7, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, MIDDLE_BRIDGE_DISTANCE + 27, -4, initialAngle);
 
                 straightenOut();
 
@@ -243,7 +244,7 @@ public class BlueDoubleStoneEncoders extends LinearOpMode {
                 grabBlock();
 
                 //drives right to go to building zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, 14, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, 14.3, initialAngle);
 
                 straightenOut();
 
@@ -265,7 +266,7 @@ public class BlueDoubleStoneEncoders extends LinearOpMode {
             case RIGHT:
 
                 //drives forward after seeing stones
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 5, -11.5, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 6.2, -11.5, initialAngle);
 
                 straightenOut();
 
@@ -288,7 +289,7 @@ public class BlueDoubleStoneEncoders extends LinearOpMode {
                 straightenOut();
 
                 //drives to second stone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, RIGHT_BRIDGE_DISTANCE + 23, -8, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, RIGHT_BRIDGE_DISTANCE + 26.2, -8, initialAngle);
 
                 straightenOut();
 
@@ -299,12 +300,12 @@ public class BlueDoubleStoneEncoders extends LinearOpMode {
                 grabBlock();
 
                 //drives right to go to building zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, 11, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, 14.3, initialAngle);
 
                 straightenOut();
 
                 //drives back to go to other zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -(RIGHT_BRIDGE_DISTANCE + 23), 0, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -(RIGHT_BRIDGE_DISTANCE + 25), 0, initialAngle);
 
                 getThirdStoneRight();
 
@@ -364,7 +365,7 @@ public class BlueDoubleStoneEncoders extends LinearOpMode {
     public void straightenOut(){
         base.drivetrain.gyroTurn(0.25, 0.4, 0, 0.45);
         telemetry.addData("Angle is ", base.gyro.heading());
-        telemetry.update();
+        //telemetry.update();
     }
 
     public void frontRangeDriveToDistance(double distance){

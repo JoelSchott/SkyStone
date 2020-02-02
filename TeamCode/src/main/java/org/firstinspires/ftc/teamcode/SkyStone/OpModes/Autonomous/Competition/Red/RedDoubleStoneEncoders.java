@@ -59,16 +59,17 @@ public class RedDoubleStoneEncoders extends LinearOpMode {
         base.init();
 
         base.drivetrain.setInitalAngle(180);
+
+        base.gyro.gyro.resetZAxisIntegrator();
         initialAngle = base.gyro.gyro.getIntegratedZValue();
 
         telemetry.clearAll();
         telemetry.addLine("May the Force be with us");
         telemetry.update();
 
-        while (!opModeIsActive()){
-            telemetry.addData("front distance is ", base.frontRange.customDistanceInInches());
-            telemetry.update();
-        }
+        waitForStart();
+
+        base.gyro.gyro.resetZAxisIntegrator();
 
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, 14, initialAngle);
         straightenOut();
@@ -125,7 +126,7 @@ public class RedDoubleStoneEncoders extends LinearOpMode {
                 releaseBlock();
 
                 //drives to second stone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, (LEFT_BRIDGE_DISTANCE + 22), AROUND_GATE_DISTANCE - 1, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, (LEFT_BRIDGE_DISTANCE + 22), AROUND_GATE_DISTANCE - 3, initialAngle);
 
                 straightenOut();
 
@@ -159,7 +160,7 @@ public class RedDoubleStoneEncoders extends LinearOpMode {
             case MIDDLE:
 
                 //strafes right next to the stones
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 2, 12.5, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 2.75, 12.5, initialAngle);
 
                 straightenOut();
 
@@ -180,7 +181,7 @@ public class RedDoubleStoneEncoders extends LinearOpMode {
                 releaseBlock();
 
                 //drives to second stone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, MIDDLE_BRIDGE_DISTANCE + 26, AROUND_GATE_DISTANCE - 1, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, MIDDLE_BRIDGE_DISTANCE + 26, AROUND_GATE_DISTANCE - 3, initialAngle);
 
                 straightenOut();
 
@@ -234,7 +235,7 @@ public class RedDoubleStoneEncoders extends LinearOpMode {
                 releaseBlock();
 
                 //drives to second stone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, RIGHT_BRIDGE_DISTANCE + 19, AROUND_GATE_DISTANCE - 5, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, RIGHT_BRIDGE_DISTANCE + 20.2, AROUND_GATE_DISTANCE - 4, initialAngle);
 
                 straightenOut();
 

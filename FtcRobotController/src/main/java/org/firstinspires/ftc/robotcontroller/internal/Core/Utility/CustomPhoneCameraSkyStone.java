@@ -103,10 +103,10 @@ public class CustomPhoneCameraSkyStone {
         }
         for (Recognition stone : stones){
             double midPoint = (stone.getLeft() + stone.getRight())/2.0;
-            if (stone.getLabel().equals("Skystone") && stone.getConfidence() > 0.73 && midPoint > 320){
+            if (stone.getLabel().equals("Skystone") && stone.getConfidence() > 0.8 && midPoint > 320){
                 return SkyStonePosition.RIGHT;
             }
-            else if (stone.getLabel().equals("Skystone") && stone.getConfidence() > 0.73 && midPoint < 320){
+            else if (stone.getLabel().equals("Skystone") && stone.getConfidence() > 0.8 && midPoint < 320){
                 return SkyStonePosition.MIDDLE;
             }
         }
@@ -218,10 +218,10 @@ public class CustomPhoneCameraSkyStone {
         }
         for (Recognition stone : stones){
             double midPoint = (stone.getLeft() + stone.getRight())/2.0;
-            if (stone.getLabel().equals("Skystone") && stone.getConfidence() > 0.73 && midPoint > 400){
+            if (stone.getLabel().equals("Skystone") && stone.getConfidence() > 0.8 && midPoint > 400){
                 return SkyStonePosition.MIDDLE;
             }
-            else if (stone.getLabel().equals("Skystone") && stone.getConfidence() > 0.73 && midPoint < 400){
+            else if (stone.getLabel().equals("Skystone") && stone.getConfidence() > 0.8 && midPoint < 400){
                 return SkyStonePosition.LEFT;
             }
         }
