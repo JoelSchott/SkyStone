@@ -298,10 +298,8 @@ public class MainTeleOp extends LinearOpMode {
             File file = new File(Environment.getExternalStorageDirectory(), "angle");
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line = br.readLine();
-            telemetry.addLine("line is " + line);
-            telemetry.update();
             int angle = Integer.parseInt(line);
-            base.drivetrain.setInitalAngle(angle);
+            base.drivetrain.setCurrentAngleAs(angle);
             br.close();
             telemetry.addData("Successfully set angle to ", angle);
             telemetry.update();

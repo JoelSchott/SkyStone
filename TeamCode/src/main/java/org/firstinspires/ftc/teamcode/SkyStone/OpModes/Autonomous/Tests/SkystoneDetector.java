@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.SkyStone.OpModes.Autonomous.Tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcontroller.internal.Core.Utility.CustomPhoneCameraSkyStone;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;

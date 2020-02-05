@@ -328,6 +328,10 @@ public class BlueDoubleStoneEncoders extends LinearOpMode {
     private void writeAngle(){
         try{
             File file = new File(Environment.getExternalStorageDirectory(), "angle");
+            if (file.exists()){
+                file.delete();
+            }
+            file.createNewFile();
             FileOutputStream outputStream = new FileOutputStream(file);
             PrintStream printStream = new PrintStream(outputStream);
             printStream.flush();
