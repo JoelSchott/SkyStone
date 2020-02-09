@@ -78,6 +78,19 @@ public class SkystoneDetector {
     }
 
     public CustomPhoneCameraSkyStone.SkyStonePosition getDecision(){
+        int leftValue = left.getValue();
+        int middleValue = middle.getValue();
+        int rightValue = right.getValue();
+
+        if (leftValue < middleValue && leftValue < rightValue){
+            return CustomPhoneCameraSkyStone.SkyStonePosition.LEFT;
+        }
+        if (middleValue < leftValue && middleValue < rightValue){
+            return CustomPhoneCameraSkyStone.SkyStonePosition.MIDDLE;
+        }
+        if (rightValue < leftValue && rightValue < middleValue){
+            return CustomPhoneCameraSkyStone.SkyStonePosition.RIGHT;
+        }
         return CustomPhoneCameraSkyStone.SkyStonePosition.UNKNOWN;
     }
 

@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.SkyStone.OpModes.Autonomous.Tests;
 
+import android.renderscript.Sampler;
+
 public class RGBColor {
 
     private int red = 0;
@@ -32,6 +34,8 @@ public class RGBColor {
     public int getBlue(){
         return blue;
     }
-
+    public int getValue(){
+        return red + green - blue;
+    }
 
 }

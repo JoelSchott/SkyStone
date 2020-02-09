@@ -28,7 +28,7 @@ public class OpenCvPhoneExample extends LinearOpMode {
         waitForStart();
 
         telemetry.addData("decision is ", detector.getDecision());
-
+        
         detector.stopStreaming();
 
         while (opModeIsActive()){
