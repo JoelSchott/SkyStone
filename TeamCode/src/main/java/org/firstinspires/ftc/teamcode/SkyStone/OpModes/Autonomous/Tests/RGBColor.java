@@ -18,9 +18,7 @@ public class RGBColor {
     public void setRed(int r){
         red = r;
     }
-    public void setGreen(int g){
-        green = g;
-    }
+    public void setGreen(int g){ green = g;}
     public void setBlue(int b){
         blue = b;
     }
