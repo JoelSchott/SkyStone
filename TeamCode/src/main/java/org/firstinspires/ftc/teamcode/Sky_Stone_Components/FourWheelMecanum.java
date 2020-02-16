@@ -535,27 +535,27 @@ public class FourWheelMecanum extends RobotComponent {
         int busyMotors = 4;
         while (base.getOpMode().opModeIsActive() && busyMotors > 1){
 
-//            double error = angle - gyro.gyro.getIntegratedZValue();
-//            while (error > 180){
-//                error -= 360;
-//            }
-//            while (error < -180){
-//                error += 360;
-//            }
-//
-//            double steer = Range.clip(error * 0.00, -1.0, 1.0);
-//
-//
-//            double minusSteerSpeed = speed - steer;
-//            double plusSteerSpeed = speed + steer;
-//
-//
-//            double max = Math.max(Math.abs(minusSteerSpeed), Math.abs(plusSteerSpeed));
-//            if (max > 1.0){
-//                minusSteerSpeed /= max;
-//                plusSteerSpeed /= max;
-//            }
-//
+            double error = angle - gyro.gyro.getIntegratedZValue();
+            while (error > 180){
+                error -= 360;
+            }
+            while (error < -180){
+                error += 360;
+            }
+
+            double steer = Range.clip(error * 0.05, -1.0, 1.0);
+
+
+            double minusSteerSpeed = speed - steer;
+            double plusSteerSpeed = speed + steer;
+
+
+            double max = Math.max(Math.abs(minusSteerSpeed), Math.abs(plusSteerSpeed));
+            if (max > 1.0){
+                minusSteerSpeed /= max;
+                plusSteerSpeed /= max;
+            }
+
             double sumEncoderError = Math.abs(frontLeft.getCurrentPosition() - frontLeft.getTargetPosition())+
                     Math.abs(backLeft.getCurrentPosition() - backLeft.getTargetPosition()) +
                     Math.abs(frontRight.getCurrentPosition() - frontRight.getTargetPosition()) +

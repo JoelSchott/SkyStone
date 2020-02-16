@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.SkyStone.OpModes.Autonomous.Tests;
+package org.firstinspires.ftc.teamcode.SkyStone.OpModes.Autonomous.Competition;
 
 import android.renderscript.Sampler;
 

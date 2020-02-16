@@ -99,7 +99,7 @@ public class BlueDoubleStoneArms extends LinearOpMode {
                 base.drivetrain.gyroTurn(MINIMUM_TURN_SPEED,MAX_TURN_SPEED, 0, 2);
 
                 //drives to specific distance from both walls
-                //frontRangeDriveToDistance(LEFT_FIRST_DISTANCE_TO_WALL);
+                //frontRangeDriveToDistance(FAR_LEFT_DISTANCE_TO_WALL);
 
                 //rotates to initial angle
                 //base.drivetrain.gyroTurn(MINIMUM_TURN_SPEED,MAX_TURN_SPEED, 0, 2);

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.SkyStone.OpModes.Autonomous.Tests;
+package org.firstinspires.ftc.teamcode.SkyStone.OpModes.Autonomous.Competition;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
@@ -28,12 +28,12 @@ public class SkystoneDetector {
     private final Point BLUE_RIGHT_TL = new Point(160, 120);
     private final Point BLUE_RIGHT_BR = new Point(210, 160);
 
-    private final Point RED_LEFT_TL = new Point(20,120);
-    private final Point RED_LEFT_BR = new Point(70, 160);
-    private final Point RED_MIDDLE_TL = new Point(90, 120);
-    private final Point RED_MIDDLE_BR = new Point(140,  160);
-    private final Point RED_RIGHT_TL = new Point(160, 120);
-    private final Point RED_RIGHT_BR = new Point(210, 160);
+    private final Point RED_LEFT_TL = new Point(10,155);
+    private final Point RED_LEFT_BR = new Point(70, 185);
+    private final Point RED_MIDDLE_TL = new Point(90, 155);
+    private final Point RED_MIDDLE_BR = new Point(150,  185);
+    private final Point RED_RIGHT_TL = new Point(170, 145);
+    private final Point RED_RIGHT_BR = new Point(230, 175);
 
     private Point leftTL;
     private Point leftBR;
@@ -99,14 +99,28 @@ public class SkystoneDetector {
         @Override
         public Mat processFrame(Mat input){
 
-            int thickness = 1;
-            Imgproc.rectangle(input, leftTL, leftBR, new Scalar(0,255,0), thickness);
-            Imgproc.rectangle(input, middleTL, middleBR, new Scalar(0,255,0), thickness);
-            Imgproc.rectangle(input, rightTL, rightBR, new Scalar(0,255,0), thickness);
-
             left = getAverageColor(input, leftTL, leftBR);
             middle = getAverageColor(input, middleTL, middleBR);
             right = getAverageColor(input, rightTL, rightBR);
+
+            int thickness = 4;
+            Scalar leftColor = new Scalar(255,0,0);
+            Scalar middleColor = new Scalar(255,0,0);
+            Scalar rightColor = new Scalar(255,0,0);
+            CustomPhoneCameraSkyStone.SkyStonePosition position = getDecision();
+            if (position == CustomPhoneCameraSkyStone.SkyStonePosition.LEFT){
+                leftColor = new Scalar(0,255,0);
+            }
+            else if (position == CustomPhoneCameraSkyStone.SkyStonePosition.MIDDLE){
+                middleColor = new Scalar(0,255,0);
+            }
+            else if (position == CustomPhoneCameraSkyStone.SkyStonePosition.RIGHT){
+                rightColor = new Scalar(0,255,0);
+            }
+
+            Imgproc.rectangle(input, leftTL, leftBR, leftColor, thickness);
+            Imgproc.rectangle(input, middleTL, middleBR, middleColor, thickness);
+            Imgproc.rectangle(input, rightTL, rightBR, rightColor, thickness);
 
             sendTelemetry();
 
