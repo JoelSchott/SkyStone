@@ -13,7 +13,7 @@ public class OpenCvPhoneExample extends LinearOpMode {
     @Override
     public void runOpMode(){
 
-        detector = new SkystoneDetector(this, true, true);
+        detector = new SkystoneDetector(this, false, false);
 
         waitForStart();
 

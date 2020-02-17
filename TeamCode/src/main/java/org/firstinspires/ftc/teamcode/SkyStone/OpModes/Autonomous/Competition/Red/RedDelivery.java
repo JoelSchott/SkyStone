@@ -46,6 +46,7 @@ public class RedDelivery extends LinearOpMode {
     private SkystoneDetector detector;
     private CustomPhoneCameraSkyStone.SkyStonePosition position = CustomPhoneCameraSkyStone.SkyStonePosition.UNKNOWN;
 
+
     public int initialAngle;
 
     @Override
@@ -247,20 +248,10 @@ public class RedDelivery extends LinearOpMode {
 
     private void writeAngle(){
         try{
-            File file = new File(Environment.getExternalStorageDirectory(), "angle");
-            FileOutputStream outputStream = new FileOutputStream(file);
-            PrintStream printStream = new PrintStream(outputStream);
-            printStream.flush();
-            int angle = base.gyro.heading() - 180;
-            while (angle > 360){
-                angle -= 360;
-            }
-            while (angle < 0){
-                angle += 360;
-            }
-            printStream.println(angle);
-            printStream.close();
-            outputStream.close();
+//            angle
+//            printStream.println(angle);
+//            printStream.close();
+//            outputStream.close();
         }
         catch(Exception e){
             telemetry.addLine("problem with i/o");
