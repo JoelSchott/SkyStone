@@ -10,9 +10,13 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.SkyStone.OpModes.Autonomous.Competition.SkystoneDetector;
 import org.firstinspires.ftc.teamcode.SkyStone.MainBaseWebcam;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.util.Calendar;
 
 @Autonomous(name = "Red Delivery", group = "Autonomous")
 public class RedDelivery extends LinearOpMode {
@@ -46,8 +50,13 @@ public class RedDelivery extends LinearOpMode {
     private SkystoneDetector detector;
     private CustomPhoneCameraSkyStone.SkyStonePosition position = CustomPhoneCameraSkyStone.SkyStonePosition.UNKNOWN;
 
-
     public int initialAngle;
+
+    private File angleFile;
+    private PrintWriter angleWriter;
+
+    private File logFile;
+    private PrintWriter logWriter;
 
     @Override
     public void runOpMode(){
@@ -57,29 +66,54 @@ public class RedDelivery extends LinearOpMode {
 
         detector = new SkystoneDetector(this, true, true);
 
+        base.drivetrain.setInitalAngle(0);
+        base.gyro.gyro.resetZAxisIntegrator();
+        initialAngle = base.gyro.gyro.getIntegratedZValue();
+
+        try{
+            angleFile = new File(Environment.getExternalStorageDirectory(), "angle");
+            if (angleFile.exists()){
+                angleFile.delete();
+            }
+            angleFile.createNewFile();
+            angleWriter = new PrintWriter(new BufferedWriter(new FileWriter(angleFile, false)));
+
+            logFile = new File(Environment.getExternalStorageDirectory(), "log");
+            logWriter = new PrintWriter(new BufferedWriter(new FileWriter(logFile, true)));
+        }
+        catch(Exception e){
+            telemetry.addLine(e.getMessage());
+        }
+
         telemetry.clearAll();
         telemetry.addLine("May the Force be with us");
         telemetry.update();
 
         waitForStart();
 
+        base.drivetrain.setInitalAngle(180);
+        base.gyro.gyro.resetZAxisIntegrator();
+        initialAngle = base.gyro.gyro.getIntegratedZValue();
+
         position = detector.getDecision();
+        detector.stopStreaming();
+
         telemetry.addData("position is ", position);
         telemetry.update();
+
+        Calendar c = Calendar.getInstance();
+        logWriter.println("NEW RED " + position + " " + c.getTime());
+        log("initial position");
 
         if (position == CustomPhoneCameraSkyStone.SkyStonePosition.UNKNOWN){
             position = CustomPhoneCameraSkyStone.SkyStonePosition.RIGHT;
         }
 
-        base.gyro.gyro.resetZAxisIntegrator();
-        base.drivetrain.setInitalAngle(180);
-        initialAngle = base.gyro.gyro.getIntegratedZValue();
-
         switch(position){
             case LEFT:
 
                 //drives forward and right after seeing stones
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10.5, 26.5, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 8, 26.5, initialAngle);
 
                 straightenOut();
 
@@ -89,18 +123,22 @@ public class RedDelivery extends LinearOpMode {
 
                 grabBlock();
 
+                straightenOut();
+
                 //drive left to go to building zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, -AROUND_GATE_DISTANCE, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -9, -9, initialAngle);
 
                 straightenOut();
 
                 //drive to other zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -LEFT_BRIDGE_DISTANCE, 0, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -62, 5, initialAngle);
 
                 releaseBlock();
 
                 //drives to second stone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, (LEFT_BRIDGE_DISTANCE + 22), AROUND_GATE_DISTANCE - 3, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 5, -5, initialAngle);
+
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 78, 10, initialAngle);
 
                 straightenOut();
 
@@ -108,17 +146,15 @@ public class RedDelivery extends LinearOpMode {
                 frontRangeDriveToDistance(LEFT_SECOND_DISTANCE_TO_WALL);
                 leftRangeDriveToDistance(COLLECTING_DISTANCE);
 
-                base.drivetrain.gyroEncoderDrive(0.2, 1.2, 0, initialAngle);
-
                 grabBlock();
 
                 //drives left to go to building zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, -AROUND_GATE_DISTANCE, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -9, -9, initialAngle);
 
                 straightenOut();
 
                 //drives back to go to other zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -(LEFT_BRIDGE_DISTANCE + 19), 0, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -75, 0, initialAngle);
 
                 getThirdStoneLeft();
 
@@ -134,7 +170,7 @@ public class RedDelivery extends LinearOpMode {
             case MIDDLE:
 
                 //strafes right next to the stones
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 2.75, 26.5, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, 26.5, initialAngle);
 
                 straightenOut();
 
@@ -144,18 +180,22 @@ public class RedDelivery extends LinearOpMode {
 
                 grabBlock();
 
+                straightenOut();
+
                 //drive left to go to building zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, -AROUND_GATE_DISTANCE, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -9, -9, initialAngle);
 
                 straightenOut();
 
                 //drive to other zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -MIDDLE_BRIDGE_DISTANCE - 4, 0, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -72, 5, initialAngle);
 
                 releaseBlock();
 
                 //drives to second stone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, MIDDLE_BRIDGE_DISTANCE + 26, AROUND_GATE_DISTANCE - 3, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 5, -5, initialAngle);
+
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 69, 10, initialAngle);
 
                 straightenOut();
 
@@ -165,13 +205,15 @@ public class RedDelivery extends LinearOpMode {
 
                 grabBlock();
 
+                straightenOut();
+
                 //drives left to go to building zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, -AROUND_GATE_DISTANCE, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -9, -9, initialAngle);
 
                 straightenOut();
 
                 //drives back to go to other zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -(MIDDLE_BRIDGE_DISTANCE + 28), 0, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -76, 0, initialAngle);
 
                 getThirdStoneMiddle();
 
@@ -198,18 +240,22 @@ public class RedDelivery extends LinearOpMode {
 
                 grabBlock();
 
+                straightenOut();
+
                 //drive left to go to building zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, -AROUND_GATE_DISTANCE, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -9, -9, initialAngle);
 
                 straightenOut();
 
                 //drive to other zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, - RIGHT_BRIDGE_DISTANCE,0, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -60,5, initialAngle);
 
                 releaseBlock();
 
                 //drives to second stone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, RIGHT_BRIDGE_DISTANCE + 20.2, AROUND_GATE_DISTANCE - 4, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED,  5, -5, initialAngle);
+
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED,  55.2, 5, initialAngle);
 
                 straightenOut();
 
@@ -219,13 +265,15 @@ public class RedDelivery extends LinearOpMode {
 
                 grabBlock();
 
+                straightenOut();
+
                 //drives left to go to building zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, -AROUND_GATE_DISTANCE, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -9, -9, initialAngle);
 
                 straightenOut();
 
                 //drives back to go to other zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -(RIGHT_BRIDGE_DISTANCE + 23), 0, initialAngle);
+                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -54, 0, initialAngle);
 
                 getThirdStoneRight();
 
@@ -263,6 +311,17 @@ public class RedDelivery extends LinearOpMode {
 
     public void straightenOut(){
         base.drivetrain.gyroTurn(0.2, 0.8, 180, 2);
+    }
+
+    private void log(String position){
+        logWriter.println("position " + position);
+        logWriter.println("heading " + base.gyro.heading());
+        logWriter.println("frontRightEncoders " + base.drivetrain.frontRight.getCurrentPosition());
+        logWriter.println("frontLeftEncoders " + base.drivetrain.frontLeft.getCurrentPosition());
+        logWriter.println("backLeftEncoders " + base.drivetrain.backLeft.getCurrentPosition());
+        logWriter.println("backRightEncoders " + base.drivetrain.backRight.getCurrentPosition());
+        logWriter.println("frontRange " + base.frontRange.customDistanceInInches());
+        logWriter.println("leftRange " + base.leftRange.customDistanceInInches());
     }
 
     public void frontRangeDriveToDistance(double distance){
