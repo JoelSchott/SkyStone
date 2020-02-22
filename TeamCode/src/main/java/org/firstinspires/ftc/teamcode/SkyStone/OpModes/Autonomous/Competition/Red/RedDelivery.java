@@ -12,9 +12,7 @@ import org.firstinspires.ftc.teamcode.SkyStone.MainBaseWebcam;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.Calendar;
 
@@ -112,177 +110,55 @@ public class RedDelivery extends LinearOpMode {
         switch(position){
             case LEFT:
 
-                //drives forward and right after seeing stones
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 8, 26.5, initialAngle);
+                getFirstStoneLeft();
 
-                straightenOut();
+                depositFirstStoneLeft();
 
-                //drives to specific distance from both walls
-                frontRangeDriveToDistance(FAR_LEFT_DISTANCE_TO_WALL);
-                leftRangeDriveToDistance(COLLECTING_DISTANCE);
+                getSecondStoneLeft();
 
-                grabBlock();
-
-                straightenOut();
-
-                //drive left to go to building zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -9, -9, initialAngle);
-
-                straightenOut();
-
-                //drive to other zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -62, 5, initialAngle);
-
-                releaseBlock();
-
-                //drives to second stone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 5, -5, initialAngle);
-
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 78, 10, initialAngle);
-
-                straightenOut();
-
-                //drives to distance from both walls
-                frontRangeDriveToDistance(LEFT_SECOND_DISTANCE_TO_WALL);
-                leftRangeDriveToDistance(COLLECTING_DISTANCE);
-
-                grabBlock();
-
-                //drives left to go to building zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -9, -9, initialAngle);
-
-                straightenOut();
-
-                //drives back to go to other zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -75, 0, initialAngle);
+                depositSecondStoneLeft();
 
                 getThirdStoneLeft();
 
-                //turns to face gate side of line
-                base.drivetrain.gyroTurn(0.3, MAX_TURN_SPEED, 150, 5);
+                depositThirdStoneLeft();
 
-                //releases and parks
-                base.arms.setRightPosition(0.1);
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 15, 0, base.gyro.gyro.getIntegratedZValue());
+                leftPark();
 
                 break;
 
             case MIDDLE:
 
-                //strafes right next to the stones
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, 26.5, initialAngle);
+                getFirstStoneMiddle();
 
-                straightenOut();
+                depositFirstStoneMiddle();
 
-                //drives to specific distance from both walls
-                frontRangeDriveToDistance(MIDDLE_FIRST_DISTANCE_TO_WALL);
-                leftRangeDriveToDistance(COLLECTING_DISTANCE);
+                getSecondStoneMiddle();
 
-                grabBlock();
-
-                straightenOut();
-
-                //drive left to go to building zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -9, -9, initialAngle);
-
-                straightenOut();
-
-                //drive to other zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -72, 5, initialAngle);
-
-                releaseBlock();
-
-                //drives to second stone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 5, -5, initialAngle);
-
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 69, 10, initialAngle);
-
-                straightenOut();
-
-                //drives to distance from both walls
-                frontRangeDriveToDistance(MIDDLE_SECOND_DISTANCE_TO_WALL);
-                leftRangeDriveToDistance(COLLECTING_DISTANCE);
-
-                grabBlock();
-
-                straightenOut();
-
-                //drives left to go to building zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -9, -9, initialAngle);
-
-                straightenOut();
-
-                //drives back to go to other zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -76, 0, initialAngle);
+                depositSecondStoneMiddle();
 
                 getThirdStoneMiddle();
 
-                //turns to face gate side of line
-                base.drivetrain.gyroTurn(0.3, MAX_TURN_SPEED, 150, 5);
+                depositThirdStoneMiddle();
 
-                releaseBlock();
-
-                //park
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 15, 0, base.gyro.gyro.getIntegratedZValue());
+                middlePark();
 
                 break;
 
             case RIGHT:
 
-                //drives back and right after seeing stones
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -7, 26.5, initialAngle);
+                getFirstStoneRight();
 
-                straightenOut();
+                depositFirstStoneRight();
 
-                //drives to specific distance from both walls
-                frontRangeDriveToDistance(RIGHT_FIRST_DISTANCE_TO_WALL);
-                leftRangeDriveToDistance(COLLECTING_DISTANCE);
+                getSecondStoneRight();
 
-                grabBlock();
-
-                straightenOut();
-
-                //drive left to go to building zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -9, -9, initialAngle);
-
-                straightenOut();
-
-                //drive to other zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -60,5, initialAngle);
-
-                releaseBlock();
-
-                //drives to second stone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED,  5, -5, initialAngle);
-
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED,  55.2, 5, initialAngle);
-
-                straightenOut();
-
-                //drives to distance from both walls
-                frontRangeDriveToDistance(RIGHT_SECOND_DISTANCE_TO_WALL);
-                leftRangeDriveToDistance(COLLECTING_DISTANCE);
-
-                grabBlock();
-
-                straightenOut();
-
-                //drives left to go to building zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -9, -9, initialAngle);
-
-                straightenOut();
-
-                //drives back to go to other zone
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -54, 0, initialAngle);
+                depositSeoondStoneRight();
 
                 getThirdStoneRight();
 
-                //turns to face gate side of line
-                base.drivetrain.gyroTurn(MINIMUM_TURN_SPEED, MAX_TURN_SPEED, 160, 5);
+                depositThirdStoneRight();
 
-                releaseBlock();
-
-                base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 15, 0, base.gyro.gyro.getIntegratedZValue());
+                rightPark();
 
                 break;
         }
@@ -292,14 +168,21 @@ public class RedDelivery extends LinearOpMode {
 
         writeAngle();
 
+        logWriter.close();
+
     }
 
     private void writeAngle(){
         try{
-//            angle
-//            printStream.println(angle);
-//            printStream.close();
-//            outputStream.close();
+            int angle = base.gyro.heading();
+            while (angle > 360){
+                angle -= 360;
+            }
+            while (angle < 0){
+                angle += 360;
+            }
+            angleWriter.println(angle);
+            angleWriter.close();
         }
         catch(Exception e){
             telemetry.addLine("problem with i/o");
@@ -349,7 +232,7 @@ public class RedDelivery extends LinearOpMode {
     public void leftRangeDriveToDistance(double distance){
         double error = Math.abs(base.leftRange.customDistanceInInches() - distance);
         double buffer = 0.8;
-        if (base.leftRange.distance(DistanceUnit.INCH) < 0 || error > 20){
+        if (base.leftRange.distance(DistanceUnit.INCH) < 0 || error > 10){
             return;
         }
         if (error > buffer){
@@ -365,17 +248,344 @@ public class RedDelivery extends LinearOpMode {
         }
     }
 
-    public void grabBlock(){
-        base.arms.setRightPosition(0.75);
+    public void lowerArm(){
+        base.arms.lowerRightArm();
+    }
+
+    public void raiseArm(){
+        base.arms.raiseRightArm();
+    }
+
+    public void grabStone(){
+        base.arms.rightClampInPower(1);
         sleep(300);
     }
 
-    public void releaseBlock(){
-        base.arms.setRightPosition(0.1);
+    public void releaseStone(){
+        base.arms.rightClampOutPower(1);
         sleep(300);
+        base.arms.rightClampOutPower(0);
     }
 
-    public void getThirdStoneLeft(){ }
-    public void getThirdStoneMiddle(){}
+    public void getFirstStoneLeft(){
+        lowerArm();
+
+        //drives forward and right after seeing stones
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 8, 26.5, initialAngle);
+        log("next to first stone encoders");
+
+        straightenOut();
+        log("straighten out after near first stone encoders");
+
+        //drives to specific distance from both walls
+        frontRangeDriveToDistance(FAR_LEFT_DISTANCE_TO_WALL);
+        leftRangeDriveToDistance(COLLECTING_DISTANCE);
+        log("sensor adjustment first stone encoders");
+
+        grabStone();
+
+        raiseArm();
+    }
+
+    public void depositFirstStoneLeft(){
+        straightenOut();
+        log("straighten out after grabbing first stone");
+
+        //drive left to go to building zone
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -9, -9, initialAngle);
+        log("drives left after grabbing first stone");
+
+        straightenOut();
+        log("straightens out before driving to foundation");
+
+        //drive to other zone
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -62, 5, initialAngle);
+        log("drives near foundation");
+
+        lowerArm();
+
+        releaseStone();
+
+        raiseArm();
+    }
+
+    public void getSecondStoneLeft(){
+        //drives to second stone
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 5, -5, initialAngle);
+        log("drives left after depositing first stone");
+
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 68, 0, initialAngle);
+        log("drives forward to second stone");
+
+        lowerArm();
+
+        straightenOut();
+        log("straighten out after driving forward to second stone");
+
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, 10, initialAngle);
+        log("drives next to second stone encoders");
+
+        straightenOut();
+        log("straightens out after next to second stone encoders");
+
+        //drives to distance from both walls
+        frontRangeDriveToDistance(LEFT_SECOND_DISTANCE_TO_WALL);
+        leftRangeDriveToDistance(COLLECTING_DISTANCE);
+        log("sensor adjustment for second stone");
+
+        grabStone();
+
+        raiseArm();
+    }
+
+    public void depositSecondStoneLeft(){
+        //drives left to go to building zone
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -9, -9, initialAngle);
+        log("drives left to deposit second stone");
+
+        straightenOut();
+        log("straightens out after moving left after second stone");
+
+        //drives back to go to other zone
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -75, 0, initialAngle);
+        log("drives back to deposit second stone");
+    }
+
+    public void getThirdStoneLeft(){
+
+    }
+
+    public void depositThirdStoneLeft(){
+
+    }
+
+    public void leftPark(){
+        //turns to face gate side of line
+        base.drivetrain.gyroTurn(0.3, MAX_TURN_SPEED, 150, 5);
+        log("turns to face parking location");
+
+        //releases and parks
+        lowerArm();
+
+        releaseStone();
+
+        raiseArm();
+
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 15, 0, base.gyro.gyro.getIntegratedZValue());
+        log("driving forward for parking");
+    }
+
+    public void getFirstStoneMiddle(){
+        lowerArm();
+
+        //strafes right next to the stones
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, 26.5, initialAngle);
+        log("encoders next to first stone");
+
+        straightenOut();
+        log("straighten out after encoders first stone");
+
+        //drives to specific distance from both walls
+        frontRangeDriveToDistance(MIDDLE_FIRST_DISTANCE_TO_WALL);
+        leftRangeDriveToDistance(COLLECTING_DISTANCE);
+        log("first stone sensor adjustment");
+
+        grabStone();
+
+        raiseArm();
+    }
+
+    public void depositFirstStoneMiddle(){
+        straightenOut();
+        log("straighten out after grabbing first stone");
+
+        //drive left to go to building zone
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -9, -9, initialAngle);
+        log("drive left after grabbing first stone");
+
+        straightenOut();
+        log("straighten out before driving to foundation");
+
+        //drive to other zone
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -72, 5, initialAngle);
+        log("drive to foundation");
+
+        lowerArm();
+
+        releaseStone();
+
+        raiseArm();
+    }
+
+    public void getSecondStoneMiddle(){
+        //drives to second stone
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 5, -5, initialAngle);
+        log("drive right after deposit first stone");
+
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 59, 0, initialAngle);
+        log("drive straight to second stone");
+
+        lowerArm();
+
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, 10, initialAngle);
+        log("drive next to second stone encoders");
+
+        straightenOut();
+        log("straighten out after next to second stone encoders");
+
+        //drives to distance from both walls
+        frontRangeDriveToDistance(MIDDLE_SECOND_DISTANCE_TO_WALL);
+        leftRangeDriveToDistance(COLLECTING_DISTANCE);
+        log("sensor adjustment second stone");
+
+        grabStone();
+
+        raiseArm();
+    }
+
+    public void depositSecondStoneMiddle(){
+        straightenOut();
+        log("straighten out after grabbing second stone");
+
+        //drives left to go to building zone
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -9, -9, initialAngle);
+        log("drives left before depositing second stone");
+
+        straightenOut();
+        log("straightens out before depositing second stone");
+
+        //drives back to go to other zone
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -76, 0, initialAngle);
+        log("drive to deposit second stone");
+    }
+
+    public void getThirdStoneMiddle(){
+
+    }
+
+    public void depositThirdStoneMiddle(){
+
+    }
+
+    public void middlePark(){
+        //turns to face gate side of line
+        base.drivetrain.gyroTurn(0.3, MAX_TURN_SPEED, 150, 5);
+        log("turns to park");
+
+        lowerArm();
+
+        releaseStone();
+
+        raiseArm();
+
+        //park
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 15, 0, base.gyro.gyro.getIntegratedZValue());
+        log("park");
+    }
+
+    public void getFirstStoneRight(){
+        lowerArm();
+
+        //drives back and right after seeing stones
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -8, 26.5, initialAngle);
+        log("drives next to first stone encoders");
+
+        straightenOut();
+        log("straightens out after near first stone encoders");
+
+        //drives to specific distance from both walls
+        frontRangeDriveToDistance(RIGHT_FIRST_DISTANCE_TO_WALL);
+        leftRangeDriveToDistance(COLLECTING_DISTANCE);
+        log("sensor adjustment first stone");
+
+        grabStone();
+
+        raiseArm();
+    }
+
+    public void depositFirstStoneRight(){
+        straightenOut();
+
+        //drive left to go to building zone
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -9, -9, initialAngle);
+        log("drive left after grabbing first stone");
+
+        straightenOut();
+        log("straighten out after driving left after collecting first stone");
+
+        //drive to other zone
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -60,5, initialAngle);
+        log("drive to foundation");
+
+        lowerArm();
+
+        releaseStone();
+
+        raiseArm();
+    }
+
+    public void getSecondStoneRight(){
+        //drives to second stone
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED,  5, -5, initialAngle);
+        log("drive left after depositing first stone");
+
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED,  45, 0, initialAngle);
+        log("drives forward after depositing first stone");
+
+        lowerArm();
+
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED,  10, 10, initialAngle);
+        log("drives next to second stone encoders");
+
+        straightenOut();
+        log("straightens out after near second stone encoders");
+
+        //drives to distance from both walls
+        frontRangeDriveToDistance(RIGHT_SECOND_DISTANCE_TO_WALL);
+        leftRangeDriveToDistance(COLLECTING_DISTANCE);
+        log("sensor adjustment for second stone");
+
+        grabStone();
+
+        raiseArm();
+    }
+
+    public void depositSeoondStoneRight(){
+        straightenOut();
+        log("straighten out after grabbing second stone");
+
+        //drives left to go to building zone
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -9, -9, initialAngle);
+        log("drive left before depositing second stone");
+
+        straightenOut();
+        log("straightens after driving left with second stone");
+
+        //drives back to go to other zone
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -54, 0, initialAngle);
+        log("drives to deposit second stone");
+    }
+
     public void getThirdStoneRight(){}
+
+    public void depositThirdStoneRight(){
+
+    }
+
+    public void rightPark(){
+        //turns to face gate side of line
+        base.drivetrain.gyroTurn(MINIMUM_TURN_SPEED, MAX_TURN_SPEED, 160, 5);
+        log("turns to park");
+
+        lowerArm();
+
+        releaseStone();
+
+        raiseArm();
+
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 15, 0, base.gyro.gyro.getIntegratedZValue());
+        log("park");
+    }
+
+
 }

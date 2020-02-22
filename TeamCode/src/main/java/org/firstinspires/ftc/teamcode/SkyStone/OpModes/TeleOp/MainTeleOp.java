@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.SkyStone.MainBase;
+import org.firstinspires.ftc.teamcode.Sky_Stone_Components.AutoStoneArms;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -27,6 +28,8 @@ public class MainTeleOp extends LinearOpMode {
     private boolean gamepad2downHeld = false;
     private boolean gamepad2leftHeld = false;
     private boolean gamepad2rightHeld = false;
+    private boolean gamepad1leftBumperHeld = false;
+    private boolean gamepad1rightBumperHeld = false;
 
     private static final int[] ENCODER_PLACING_POSITIONS = {-143, -756, -1231, -1745, -2235, -3016, -1785};
     private int towerLevel = 0;
@@ -100,10 +103,6 @@ public class MainTeleOp extends LinearOpMode {
                     base.drivetrain.fieldRelativeDrive(forward, right, turn);
                     break;
             }
-         //   if (gamepad)
-
-
-            //setting angles
 
             if (gamepad1.dpad_left){
                 base.drivetrain.setCurrentAngleAs(180);
@@ -123,20 +122,45 @@ public class MainTeleOp extends LinearOpMode {
 
             //------------------------------------ARMS FOR AUTONOMOUS--------------------------------------------
             if (gamepad1.left_bumper){
-                base.arms.setLeftPower(-1);
-            }
-            else if (gamepad1.left_trigger > 0.5){
-                base.arms.setLeftPower(1);
+                if (! gamepad1leftBumperHeld){
+                    gamepad1leftBumperHeld = true;
+                    if (Math.abs(base.arms.leftArm.getPosition() - AutoStoneArms.LEFT_ARM_UP_POSITION) < 0.1){
+                        base.arms.lowerLeftArm();
+                    }
+                    else{
+                        base.arms.raiseLeftArm();
+                    }
+                }
             }
             else{
-                base.arms.setLeftPower(-0.1);
+                gamepad1leftBumperHeld = false;
+            }
+            if (gamepad1.left_trigger > 0.2){
+                base.arms.leftClampInPower(gamepad1.left_trigger);
+            }
+            else{
+                base.arms.leftClampInPower(0);
             }
 
-            if (gamepad1.right_bumper) {
-                base.arms.setRightPosition(0.1);
+            if (gamepad1.right_bumper){
+                if (! gamepad1rightBumperHeld){
+                    gamepad1rightBumperHeld = true;
+                    if (Math.abs(base.arms.rightArm.getPosition() - AutoStoneArms.RIGHT_ARM_UP_POSITION) < 0.1){
+                        base.arms.lowerRightArm();
+                    }
+                    else{
+                        base.arms.raiseRightArm();
+                    }
+                }
             }
-            else if (gamepad1.right_trigger > 0.5){
-                base.arms.setRightPosition(0.68);
+            else{
+                gamepad1rightBumperHeld = false;
+            }
+            if (gamepad1.right_trigger > 0.2){
+                base.arms.rightClampInPower(gamepad1.right_trigger);
+            }
+            else{
+                base.arms.rightClampInPower(0);
             }
 
 
@@ -284,6 +308,9 @@ public class MainTeleOp extends LinearOpMode {
             telemetry.addLine();
             telemetry.addData("front distance ", base.frontRange.customDistanceInInches());
             telemetry.addData("left distance is ", base.leftRange.customDistanceInInches());
+            telemetry.addLine();
+            telemetry.addData("left arm position is " , base.arms.leftArm.getPosition());
+            telemetry.addData("right arm position is ", base.arms.rightArm.getPosition());
 //            telemetry.addData("front right encoders are ", base.drivetrain.frontRight.getCurrentPosition());
 //            telemetry.addData("front left ", base.drivetrain.frontLeft.getCurrentPosition());
 //            telemetry.addData("back left ", base.drivetrain.backLeft.getCurrentPosition());

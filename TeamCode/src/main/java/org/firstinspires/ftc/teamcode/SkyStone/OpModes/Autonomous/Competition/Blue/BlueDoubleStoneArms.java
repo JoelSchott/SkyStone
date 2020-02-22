@@ -344,19 +344,19 @@ public class BlueDoubleStoneArms extends LinearOpMode {
     }
 
     private void grabBlock(){
-        base.arms.setLeftPower(1);
-        sleep(350);
-        base.arms.setLeftPower(0.3);
+//        base.arms.setLeftPower(1);
+//        sleep(350);
+//        base.arms.setLeftPower(0.3);
     }
 
     private void releaseBlock(){
-        try{
-            wait(2000);}
-        catch(Exception e){
-            e.printStackTrace();
-        }
-        base.arms.setLeftPower(-1);
-        sleep(600);
-        base.arms.setLeftPower(0);
+//        try{
+//            wait(2000);}
+////        catch(Exception e){
+////            e.printStackTrace();
+////        }
+////        base.arms.setLeftPower(-1);
+////        sleep(600);
+////        base.arms.setLeftPower(0);
     }
 }

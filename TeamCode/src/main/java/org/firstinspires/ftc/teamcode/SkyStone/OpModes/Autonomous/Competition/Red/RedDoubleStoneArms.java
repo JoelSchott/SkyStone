@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.SkyStone.OpModes.Autonomous.Competition.Red;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcontroller.internal.Core.Utility.CustomPhoneCameraSkyStone;
@@ -159,7 +158,7 @@ public class RedDoubleStoneArms extends LinearOpMode {
                 base.drivetrain.gyroTurn(MINIMUM_TURN_SPEED, MAX_TURN_SPEED, 160, 5);
 
                 //releases and parks
-                base.arms.setRightPosition(0.1);
+                base.arms.setRightArmPosition(0.1);
                 base.drivetrain.encoderDrive(DRIVE_SPEED, FourWheelMecanum.Direction.FORWARD, 15, 5);
 
                 break;
@@ -344,12 +343,12 @@ public class RedDoubleStoneArms extends LinearOpMode {
     }
 
     private void grabBlock(){
-        base.arms.setRightPosition(0.75);
+        base.arms.setRightArmPosition(0.75);
         sleep(300);
     }
 
     private void releaseBlock(){
-        base.arms.setRightPosition(0.1);
+        base.arms.setRightArmPosition(0.1);
         sleep(300);
     }
     private void park(){

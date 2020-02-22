@@ -418,15 +418,15 @@ public class BlueDoubleStoneEncoders extends LinearOpMode {
 
 
     public void grabBlock(){
-        base.arms.setLeftPower(1);
-        sleep(350);
-        base.arms.setLeftPower(0.3);
+//        base.arms.setLeftPower(1);
+//        sleep(350);
+//        base.arms.setLeftPower(0.3);
     }
 
     public void releaseBlock(){
-        base.arms.setLeftPower(-1);
-        sleep(750);
-        base.arms.setLeftPower(-0.05);
+//        base.arms.setLeftPower(-1);
+//        sleep(750);
+//        base.arms.setLeftPower(-0.05);
     }
 
     public void getThirdStoneLeft(){ }

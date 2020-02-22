@@ -8,7 +8,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.robotcontroller.internal.Core.Utility.CustomPhoneCameraSkyStone;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
-import org.firstinspires.ftc.teamcode.Sky_Stone_Components.FourWheelMecanum;
 import org.firstinspires.ftc.teamcode.SkyStone.MainBaseWebcam;
 
 import java.io.File;
@@ -152,7 +151,7 @@ public class RedDoubleStoneEncoders extends LinearOpMode {
                 base.drivetrain.gyroTurn(0.3, MAX_TURN_SPEED, 150, 5);
 
                 //releases and parks
-                base.arms.setRightPosition(0.1);
+                base.arms.setRightArmPosition(0.1);
                 base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 15, 0, base.gyro.gyro.getIntegratedZValue());
 
                 break;
@@ -343,12 +342,12 @@ public class RedDoubleStoneEncoders extends LinearOpMode {
     }
 
     public void grabBlock(){
-        base.arms.setRightPosition(0.75);
+        base.arms.setRightArmPosition(0.75);
         sleep(300);
     }
 
     public void releaseBlock(){
-        base.arms.setRightPosition(0.1);
+        base.arms.setRightArmPosition(0.1);
         sleep(300);
     }
 

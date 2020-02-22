@@ -5,14 +5,14 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcontroller.internal.Core.Utility.CustomPhoneCameraSkyStone;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
-import org.firstinspires.ftc.teamcode.SkyStone.MainBase1Webcam;
+import org.firstinspires.ftc.teamcode.SkyStone.MainBaseWebcam;
 
 import java.util.List;
 
 @Autonomous(name = "Cropping manipulation")
 public class WebcamVision extends LinearOpMode {
 
-    private MainBase1Webcam base;
+    private MainBaseWebcam base;
 
     private List<Recognition> objects;
 
@@ -34,7 +34,7 @@ public class WebcamVision extends LinearOpMode {
 
     @Override
     public void runOpMode(){
-        base = new MainBase1Webcam(hardwareMap, telemetry, this);
+        base = new MainBaseWebcam(hardwareMap, telemetry, this);
         base.init();
 
         waitForStart();

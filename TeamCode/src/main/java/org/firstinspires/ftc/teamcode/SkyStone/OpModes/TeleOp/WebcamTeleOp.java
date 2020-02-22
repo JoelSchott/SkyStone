@@ -6,13 +6,13 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.robotcontroller.internal.Core.Utility.CustomPhoneCameraSkyStone;
 import org.firstinspires.ftc.robotcontroller.internal.Core.Utility.CustomSounds;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
-import org.firstinspires.ftc.teamcode.SkyStone.MainBase1Webcam;
+import org.firstinspires.ftc.teamcode.SkyStone.MainBaseWebcam;
 
 
 @TeleOp(name = "2 Webcam TeleOp", group = "TeleOp")
 public class WebcamTeleOp extends LinearOpMode {
 
-    MainBase1Webcam base;
+    MainBaseWebcam base;
 
     DrivetrainState driveState = DrivetrainState.ROBOT_RELATIVE;
 
@@ -31,7 +31,7 @@ public class WebcamTeleOp extends LinearOpMode {
     @Override
     public void runOpMode(){
 
-        base = new MainBase1Webcam(hardwareMap, telemetry, this);
+        base = new MainBaseWebcam(hardwareMap, telemetry, this);
         base.init();
 
         telemetry.clear();
