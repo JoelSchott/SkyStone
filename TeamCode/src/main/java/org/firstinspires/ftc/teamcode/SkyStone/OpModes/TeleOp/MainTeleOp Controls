@@ -22,7 +22,7 @@ D-pad top --------------- sets angle to 90 degrees for field-relative drive
 
 Gamepad 2---------------------------------------------------------------------------
 
-left joystick y ---------- foundation mover up/down
+left joystick y ---------- foundation movers up/down
 left joystick x ---------
 left joystick button ----
 right joystick y -------- lift up / down
@@ -41,4 +41,4 @@ D-pad bottom ------------ counts the skyscraper level one lower
 D-pad right ------------- rotator to out position
 D-pad top --------------- counts the skyscraper level one higher
 
-as of 2/18/2020
+as of 2/23/2020

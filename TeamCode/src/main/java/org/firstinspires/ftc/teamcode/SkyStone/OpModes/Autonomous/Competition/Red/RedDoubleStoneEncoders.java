@@ -15,7 +15,7 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.List;
 
-@Autonomous(name = "Red Double Stone Encoders", group = "Autonomous")
+//@Autonomous(name = "Red Double Stone Encoders", group = "Autonomous")
 public class RedDoubleStoneEncoders extends LinearOpMode {
 
     public MainBaseWebcam base;

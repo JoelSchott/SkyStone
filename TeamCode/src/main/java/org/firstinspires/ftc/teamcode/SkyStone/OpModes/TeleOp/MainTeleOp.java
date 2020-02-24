@@ -5,6 +5,7 @@ import android.os.Environment;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.SkyStone.MainBase;
 import org.firstinspires.ftc.teamcode.Sky_Stone_Components.AutoStoneArms;
@@ -118,7 +119,9 @@ public class MainTeleOp extends LinearOpMode {
             }
 
             //--------------------------------------FOUNDATION MOVING----------------------------------------------
-            base.foundation.moveServo(gamepad2.left_stick_y);
+            double foundationPower = Range.clip(gamepad2.left_stick_y, -1 ,1);
+            base.foundation.moveRightServo(foundationPower);
+            base.foundation.moveLeftServo(foundationPower);
 
             //------------------------------------ARMS FOR AUTONOMOUS--------------------------------------------
             if (gamepad1.left_bumper){

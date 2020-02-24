@@ -17,7 +17,7 @@ import java.io.PrintStream;
 import java.util.List;
 
 
-@Autonomous(name = "Blue Double Stone Encoders", group = "Autonomous")
+//@Autonomous(name = "Blue Double Stone Encoders", group = "Autonomous")
 public class BlueDoubleStoneEncoders extends LinearOpMode {
 
     public MainBaseWebcam base;

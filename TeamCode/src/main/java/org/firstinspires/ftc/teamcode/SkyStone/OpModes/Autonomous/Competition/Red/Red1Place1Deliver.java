@@ -16,8 +16,8 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Calendar;
 
-@Autonomous(name = "Red Delivery", group = "Autonomous")
-public class RedDelivery extends LinearOpMode {
+@Autonomous(name = "Red 1 Place 1 Delivery Park", group = "Autonomous")
+public class Red1Place1Deliver extends LinearOpMode {
 
     public final static double DRIVE_SPEED = 1.0;
     public static final double MAX_TURN_SPEED = 0.5;
@@ -152,7 +152,7 @@ public class RedDelivery extends LinearOpMode {
 
                 getSecondStoneRight();
 
-                depositSeoondStoneRight();
+                depositSecondStoneRight();
 
                 getThirdStoneRight();
 
@@ -196,7 +196,7 @@ public class RedDelivery extends LinearOpMode {
         base.drivetrain.gyroTurn(0.2, 0.8, 180, 2);
     }
 
-    private void log(String position){
+    public void log(String position){
         logWriter.println("position " + position);
         logWriter.println("heading " + base.gyro.heading());
         logWriter.println("frontRightEncoders " + base.drivetrain.frontRight.getCurrentPosition());
@@ -529,7 +529,7 @@ public class RedDelivery extends LinearOpMode {
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED,  5, -5, initialAngle);
         log("drive left after depositing first stone");
 
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED,  45, 0, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED,  51, 0, initialAngle);
         log("drives forward after depositing first stone");
 
         lowerArm();
@@ -550,7 +550,7 @@ public class RedDelivery extends LinearOpMode {
         raiseArm();
     }
 
-    public void depositSeoondStoneRight(){
+    public void depositSecondStoneRight(){
         straightenOut();
         log("straighten out after grabbing second stone");
 

@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.SkyStone.OpModes.Autonomous.Competition.R
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.Sky_Stone_Components.FourWheelMecanum;
 import org.firstinspires.ftc.teamcode.SkyStone.MainBase;
 
 @Autonomous(name = "Red Foundation Bridge", group = "Autonomous")
@@ -40,7 +39,7 @@ public class RedFoundationBridge extends LinearOpMode {
         base.drivetrain.gyroEncoderDrive(0.3, 0, 8, initialAngle);
 
         //grabs foundation
-        base.foundation.moveServo(-1);
+        base.foundation.moveRightServo(-1);
         sleep(750);
 
 
@@ -54,9 +53,9 @@ public class RedFoundationBridge extends LinearOpMode {
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -2, 15, base.gyro.gyro.getIntegratedZValue());
 
         //lets go of foundation
-        base.foundation.moveServo(1);
+        base.foundation.moveRightServo(1);
         sleep(500);
-        base.foundation.moveServo(0);
+        base.foundation.moveRightServo(0);
 
         //drives back for parking
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -5.5, 0, base.gyro.gyro.getIntegratedZValue());

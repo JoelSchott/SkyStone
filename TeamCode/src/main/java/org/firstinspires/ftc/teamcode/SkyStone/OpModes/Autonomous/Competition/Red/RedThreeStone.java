@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.SkyStone.OpModes.Autonomous.Competition.R
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 
-@Autonomous(name = "Red Three Stone", group = "Autonomous")
+//@Autonomous(name = "Red Three Stone", group = "Autonomous")
 public class RedThreeStone extends RedDoubleStoneEncoders {
 
     @Override

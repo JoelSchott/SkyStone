@@ -3,9 +3,7 @@ package org.firstinspires.ftc.teamcode.SkyStone.OpModes.Autonomous.Competition.B
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.robotcontroller.internal.Core.Utility.CustomSounds;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
-import org.firstinspires.ftc.teamcode.Sky_Stone_Components.FourWheelMecanum;
 import org.firstinspires.ftc.teamcode.SkyStone.MainBase;
 
 import java.util.List;
@@ -45,7 +43,7 @@ public class BlueFoundationBridge extends LinearOpMode {
         base.drivetrain.gyroEncoderDrive(0.3, 0, 8, initialAngle);
 
         //grabs foundation
-        base.foundation.moveServo(-1);
+        base.foundation.moveRightServo(-1);
         sleep(750);
 
 
@@ -59,9 +57,9 @@ public class BlueFoundationBridge extends LinearOpMode {
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -2, 20, base.gyro.gyro.getIntegratedZValue());
 
         //lets go of foundation
-        base.foundation.moveServo(1);
+        base.foundation.moveRightServo(1);
         sleep(500);
-        base.foundation.moveServo(0);
+        base.foundation.moveRightServo(0);
 
         //drives forward for parking
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 8, 0, base.gyro.gyro.getIntegratedZValue());

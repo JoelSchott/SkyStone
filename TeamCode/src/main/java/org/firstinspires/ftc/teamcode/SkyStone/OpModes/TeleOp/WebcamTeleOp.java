@@ -65,7 +65,7 @@ public class WebcamTeleOp extends LinearOpMode {
             }
 
             //--------------------------------------FOUNDATION MOVING----------------------------------------------
-            base.foundation.moveServo(gamepad2.left_stick_y);
+            base.foundation.moveRightServo(gamepad2.left_stick_y);
 
 
 

@@ -17,8 +17,8 @@ import java.io.PrintWriter;
 import java.util.Calendar;
 
 
-@Autonomous(name = "Blue Stone Delivery", group = "Autonomous")
-public class BlueDelivery extends LinearOpMode {
+@Autonomous(name = "Blue 1 Place 1 Delivery Park", group = "Autonomous")
+public class Blue1Place1Deliver extends LinearOpMode {
 
     public final static double DRIVE_SPEED = 1.0;
     public static final double MAX_TURN_SPEED = 0.5;
@@ -191,7 +191,7 @@ public class BlueDelivery extends LinearOpMode {
 
     }
 
-    private void log(String position){
+    public void log(String position){
         logWriter.println("position " + position);
         logWriter.println("heading " + base.gyro.heading());
         logWriter.println("frontRightEncoders " + base.drivetrain.frontRight.getCurrentPosition());

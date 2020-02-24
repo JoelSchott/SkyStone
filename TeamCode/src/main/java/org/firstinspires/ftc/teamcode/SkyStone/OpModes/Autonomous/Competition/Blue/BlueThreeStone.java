@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.SkyStone.OpModes.Autonomous.Competition.B
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-@Autonomous(name = "Blue Three Stone", group = "Autonomous")
+//@Autonomous(name = "Blue Three Stone", group = "Autonomous")
 
 public class BlueThreeStone extends BlueDoubleStoneEncoders{
 
