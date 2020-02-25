@@ -36,9 +36,11 @@ public class Red2PlacePark extends Red1Place1Deliver{
     public void rightPark(){
         //drives left
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, -10, initialAngle);
+        log("drive forward and left to park");
 
         //parks
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 30, 0, initialAngle);
+        log("drives forward to park");
     }
 
     @Override
@@ -67,9 +69,11 @@ public class Red2PlacePark extends Red1Place1Deliver{
     public void middlePark(){
         //drives left
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, -10, initialAngle);
+        log("drive forward and left to park");
 
         //parks
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 30, 0, initialAngle);
+        log("drives forward to park");
     }
 
     @Override
@@ -98,9 +102,11 @@ public class Red2PlacePark extends Red1Place1Deliver{
     public void leftPark(){
         //drives left
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, -10, initialAngle);
+        log("drives forward and left to park");
 
         //parks
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 30, 0, initialAngle);
+        log("drives forward to park");
     }
 
 }

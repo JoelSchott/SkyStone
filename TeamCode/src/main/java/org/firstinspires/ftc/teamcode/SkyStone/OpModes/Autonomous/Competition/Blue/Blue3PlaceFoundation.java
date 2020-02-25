@@ -13,27 +13,27 @@ public class Blue3PlaceFoundation  extends Blue2PlaceFoundation{
     @Override
     public void getThirdStoneLeft(){
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 5, 5, initialAngle);
-        log("left drive forward after depositing first");
+        log("left drive forward after depositing second");
 
         straightenOut();
-        log("left straighten after strafing after depositing first");
+        log("left straighten after strafing after depositing second");
 
         //drives to second stone
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 58, 0, initialAngle);
-        log("left to other zone second stone with encoders");
+        log("left to other zone third stone with encoders");
 
         lowerArm();
 
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, -10, initialAngle);
-        log("left next to second stone encoders");
+        log("left next to third stone encoders");
 
         straightenOut();
-        log("left straighten near second stone");
+        log("left straighten near third stone");
 
         //drives to distance from both walls
         frontRangeDriveToDistance(MIDDLE_FIRST_DISTANCE_TO_WALL);
         leftRangeDriveToDistance(COLLECTING_DISTANCE);
-        log("left second stone adjustment with sensors");
+        log("left third stone adjustment with sensors");
 
         grabStone();
 
@@ -44,14 +44,14 @@ public class Blue3PlaceFoundation  extends Blue2PlaceFoundation{
     public void depositThirdStoneLeft(){
         //drive right to go to building zone
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -9, 9, initialAngle);
-        log("drive right after grabbing first stone");
+        log("left drive right after grabbing third stone");
 
         straightenOut();
-        log("straighten out after strafe right after first stone");
+        log("left straighten out after strafe right after third stone");
 
         //drive to other zone
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -59, -5, initialAngle);
-        log("drove to foundation with first stone");
+        log("left drove to foundation with third stone");
 
         lowerArm();
 
@@ -64,6 +64,7 @@ public class Blue3PlaceFoundation  extends Blue2PlaceFoundation{
     public void leftPark(){
         //strafes flush to foundation
         base.drivetrain.gyroEncoderDrive(0.3, 0, -5, initialAngle);
+        log("left drive flush to foundation");
 
         //grabs foundation
         base.foundation.moveLeftServo(1);
@@ -71,9 +72,11 @@ public class Blue3PlaceFoundation  extends Blue2PlaceFoundation{
 
         //drives forward and right before turning
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, 5, initialAngle);
+        log("left drive forward and right with foundation");
 
         //turns to place foundation
         base.drivetrain.gyroTurn(0.1, 1, 90, 4);
+        log("left turn to place foundation");
 
         //releases foundation
         base.foundation.moveLeftServo(-1);
@@ -82,33 +85,34 @@ public class Blue3PlaceFoundation  extends Blue2PlaceFoundation{
 
         //parks
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, 40, base.gyro.gyro.getIntegratedZValue());
+        log("left park");
     }
 
 
     @Override
     public void getThirdStoneMiddle(){
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 5, 5, initialAngle);
-        log("left drive forward after depositing first");
+        log("middle drive forward after depositing second");
 
         straightenOut();
-        log("left straighten after strafing after depositing first");
+        log("middle straighten after strafing after depositing second");
 
         //drives to second stone
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 50, 0, initialAngle);
-        log("left to other zone second stone with encoders");
+        log("middle to other zone third stone with encoders");
 
         lowerArm();
 
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, -10, initialAngle);
-        log("left next to second stone encoders");
+        log("middle next to third stone encoders");
 
         straightenOut();
-        log("left straighten near second stone");
+        log("middle straighten near third stone");
 
         //drives to distance from wall
         frontRangeDriveToDistance(LEFT_FIRST_DISTANCE_TO_WALL);
 
-        log("left second stone adjustment with sensors");
+        log("middle third stone adjustment with sensors");
 
         grabStone();
 
@@ -119,14 +123,14 @@ public class Blue3PlaceFoundation  extends Blue2PlaceFoundation{
     public void depositThirdStoneMiddle(){
         //drive right to go to building zone
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -9, 9, initialAngle);
-        log("drive right after grabbing first stone");
+        log("middle drive right after grabbing third stone");
 
         straightenOut();
-        log("straighten out after strafe right after first stone");
+        log("middle straighten out after strafe right after third stone");
 
         //drive to other zone
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -51, -5, initialAngle);
-        log("drove to foundation with first stone");
+        log("drove to foundation with third stone");
 
         lowerArm();
 
@@ -139,6 +143,7 @@ public class Blue3PlaceFoundation  extends Blue2PlaceFoundation{
     public void middlePark(){
         //strafes flush to foundation
         base.drivetrain.gyroEncoderDrive(0.3, 0, -5, initialAngle);
+        log("middle flush to foundation");
 
         //grabs foundation
         base.foundation.moveLeftServo(1);
@@ -146,9 +151,11 @@ public class Blue3PlaceFoundation  extends Blue2PlaceFoundation{
 
         //drives forward and right before turning
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, 5, initialAngle);
+        log("middle drive forward and right with foundation");
 
         //turns to place foundation
         base.drivetrain.gyroTurn(0.1, 1, 90, 4);
+        log("middle turn to place foundation");
 
         //releases foundation
         base.foundation.moveLeftServo(-1);
@@ -157,33 +164,34 @@ public class Blue3PlaceFoundation  extends Blue2PlaceFoundation{
 
         //parks
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, 40, base.gyro.gyro.getIntegratedZValue());
+        log("middle park");
     }
 
 
     @Override
     public void getThirdStoneRight(){
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 5, 5, initialAngle);
-        log("left drive forward after depositing first");
+        log("right drive forward after depositing second");
 
         straightenOut();
-        log("left straighten after strafing after depositing first");
+        log("right straighten after strafing after depositing second");
 
         //drives to second stone
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 50, 0, initialAngle);
-        log("left to other zone second stone with encoders");
+        log("right to other zone third stone with encoders");
 
         lowerArm();
 
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, -10, initialAngle);
-        log("left next to second stone encoders");
+        log("right next to third stone encoders");
 
         straightenOut();
-        log("left straighten near second stone");
+        log("right straighten near third stone");
 
         //drives to distance from both walls
         frontRangeDriveToDistance(MIDDLE_FIRST_DISTANCE_TO_WALL);
         leftRangeDriveToDistance(COLLECTING_DISTANCE);
-        log("left second stone adjustment with sensors");
+        log("right third stone adjustment with sensors");
 
         grabStone();
 
@@ -194,14 +202,14 @@ public class Blue3PlaceFoundation  extends Blue2PlaceFoundation{
     public void depositThirdStoneRight(){
         //drive right to go to building zone
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -9, 9, initialAngle);
-        log("drive right after grabbing first stone");
+        log("drive right after grabbing third stone");
 
         straightenOut();
-        log("straighten out after strafe right after first stone");
+        log("straighten out after strafe right after third stone");
 
         //drive to other zone
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -51, -5, initialAngle);
-        log("drove to foundation with first stone");
+        log("drove to foundation with third stone");
 
         lowerArm();
 
@@ -214,6 +222,7 @@ public class Blue3PlaceFoundation  extends Blue2PlaceFoundation{
     public void rightPark(){
         //strafes flush to foundation
         base.drivetrain.gyroEncoderDrive(0.3, 0, -5, initialAngle);
+        log("flush to foundation");
 
         //grabs foundation
         base.foundation.moveLeftServo(1);
@@ -221,9 +230,11 @@ public class Blue3PlaceFoundation  extends Blue2PlaceFoundation{
 
         //drives forward and right before turning
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, 5, initialAngle);
+        log("forward and right with foundation");
 
         //turns to place foundation
         base.drivetrain.gyroTurn(0.1, 1, 90, 4);
+        log("turn to place foundation");
 
         //releases foundation
         base.foundation.moveLeftServo(-1);
@@ -232,6 +243,7 @@ public class Blue3PlaceFoundation  extends Blue2PlaceFoundation{
 
         //parks
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, 40, base.gyro.gyro.getIntegratedZValue());
+        log("right park");
     }
 
 }

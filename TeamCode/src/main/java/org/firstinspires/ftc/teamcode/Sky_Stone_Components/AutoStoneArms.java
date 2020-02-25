@@ -13,10 +13,10 @@ public class AutoStoneArms extends RobotComponent{
     public Servo rightArm;
     public CRServo rightClamp;
 
-    public final static double RIGHT_ARM_UP_POSITION = 0.7;
-    public final static double RIGHT_ARM_DOWN_POSITION = 0.3;
+    public final static double RIGHT_ARM_UP_POSITION = 0.65;
+    public final static double RIGHT_ARM_DOWN_POSITION = 0.33;
     public final static double LEFT_ARM_UP_POSITION = 0.52;
-    public final static double LEFT_ARM_DOWN_POSITION = 0.85;
+    public final static double LEFT_ARM_DOWN_POSITION = 0.90;
 
 
     public AutoStoneArms(RobotBase base){
@@ -52,10 +52,10 @@ public class AutoStoneArms extends RobotComponent{
         leftClamp.setPower(-Math.abs(power));
     }
     public void rightClampInPower(double power){
-        rightClamp.setPower(Math.abs(power));
+        rightClamp.setPower(-Math.abs(power));
     }
     public void rightClampOutPower(double power){
-        rightClamp.setPower(-Math.abs(power));
+        rightClamp.setPower(Math.abs(power));
     }
 
     public void stop(){

@@ -15,6 +15,7 @@ public class Blue2PlaceFoundation extends Blue2PlacePark {
     public void leftPark(){
         //strafes flush to foundation
         base.drivetrain.gyroEncoderDrive(0.3, 0, -5, initialAngle);
+        log("left drive flush to foundation");
 
         //grabs foundation
         base.foundation.moveLeftServo(1);
@@ -22,9 +23,11 @@ public class Blue2PlaceFoundation extends Blue2PlacePark {
 
         //drives forward and right before turning
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, 5, initialAngle);
+        log("left drive forward and right with foundation");
 
         //turns to place foundation
         base.drivetrain.gyroTurn(0.1, 1, 90, 4);
+        log("left turn to place foundation");
 
         //releases foundation
         base.foundation.moveLeftServo(-1);
@@ -33,12 +36,14 @@ public class Blue2PlaceFoundation extends Blue2PlacePark {
 
         //parks
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, 40, base.gyro.gyro.getIntegratedZValue());
+        log("left park");
     }
 
     @Override
     public void middlePark(){
         //strafes flush to foundation
         base.drivetrain.gyroEncoderDrive(0.3, 0, -5, initialAngle);
+        log("middle drive flush to foundation");
 
         //grabs foundation
         base.foundation.moveLeftServo(1);
@@ -46,9 +51,11 @@ public class Blue2PlaceFoundation extends Blue2PlacePark {
 
         //drives forward and right before turning
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, 5, initialAngle);
+        log("middle drive forward and right with foundation");
 
         //turns to place foundation
         base.drivetrain.gyroTurn(0.1, 1, 90, 4);
+        log("middle turn to place foundation");
 
         //releases foundation
         base.foundation.moveLeftServo(-1);
@@ -57,12 +64,14 @@ public class Blue2PlaceFoundation extends Blue2PlacePark {
 
         //parks
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, 40, base.gyro.gyro.getIntegratedZValue());
+        log("middle park");
     }
 
     @Override
     public void rightPark(){
         //strafes flush to foundation
         base.drivetrain.gyroEncoderDrive(0.3, 0, -5, initialAngle);
+        log("right drive flush to foundation");
 
         //grabs foundation
         base.foundation.moveLeftServo(1);
@@ -70,9 +79,11 @@ public class Blue2PlaceFoundation extends Blue2PlacePark {
 
         //drives forward and right before turning
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, 5, initialAngle);
+        log("right drive forward and right");
 
         //turns to place foundation
         base.drivetrain.gyroTurn(0.1, 1, 90, 4);
+        log("right turn to place foundation");
 
         //releases foundation
         base.foundation.moveLeftServo(-1);
@@ -81,5 +92,6 @@ public class Blue2PlaceFoundation extends Blue2PlacePark {
 
         //parks
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, 40, base.gyro.gyro.getIntegratedZValue());
+        log("right park");
     }
 }
