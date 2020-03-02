@@ -22,7 +22,6 @@ public class PathTest extends LinearOpMode {
         base = new MainBase(hardwareMap, telemetry, this);
         base.init();
 
-
         telemetry.addLine("All Systems Go");
         telemetry.update();
 
@@ -31,8 +30,7 @@ public class PathTest extends LinearOpMode {
 
         waitForStart();
 
-        base.drivetrain.gyroEncoderDrive(1, 40, 20, initialAngle);
-        base.drivetrain.gyroEncoderDrive(1, 0, -20, initialAngle);
+        base.drivetrain.gyroEncoderDrive(1, 20, 0, initialAngle);
 
     }
 

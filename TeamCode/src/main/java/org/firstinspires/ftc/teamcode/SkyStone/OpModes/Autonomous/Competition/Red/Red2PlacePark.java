@@ -22,10 +22,10 @@ public class Red2PlacePark extends Red1Place1Deliver{
         log("straighten out after driving left after collecting first stone");
 
         //drive to other zone
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -84,5, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -84,10, initialAngle);
         log("drive to foundation");
 
-        lowerArm();
+        lowerArmSleep();
 
         releaseStone();
 
@@ -37,6 +37,8 @@ public class Red2PlacePark extends Red1Place1Deliver{
         //drives left
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, -10, initialAngle);
         log("drive forward and left to park");
+
+        base.arms.shutRightClamp();
 
         //parks
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 30, 0, initialAngle);
@@ -55,10 +57,10 @@ public class Red2PlacePark extends Red1Place1Deliver{
         log("straighten out after driving left after collecting first stone");
 
         //drive to other zone
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -92,5, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -92,10, initialAngle);
         log("drive to foundation");
 
-        lowerArm();
+        lowerArmSleep();
 
         releaseStone();
 
@@ -70,6 +72,8 @@ public class Red2PlacePark extends Red1Place1Deliver{
         //drives left
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, -10, initialAngle);
         log("drive forward and left to park");
+
+        base.arms.shutRightClamp();
 
         //parks
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 30, 0, initialAngle);
@@ -88,10 +92,10 @@ public class Red2PlacePark extends Red1Place1Deliver{
         log("straighten out after driving left after collecting first stone");
 
         //drive to other zone
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -100,5, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -100,10, initialAngle);
         log("drive to foundation");
 
-        lowerArm();
+        lowerArmSleep();
 
         releaseStone();
 
@@ -103,6 +107,8 @@ public class Red2PlacePark extends Red1Place1Deliver{
         //drives left
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, -10, initialAngle);
         log("drives forward and left to park");
+
+        base.arms.shutRightClamp();
 
         //parks
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 30, 0, initialAngle);

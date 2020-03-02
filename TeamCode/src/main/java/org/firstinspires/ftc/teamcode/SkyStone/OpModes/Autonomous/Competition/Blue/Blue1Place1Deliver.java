@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcontroller.internal.Core.Utility.CustomPhoneCameraSkyStone;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.teamcode.SkyStone.MainBase;
 import org.firstinspires.ftc.teamcode.SkyStone.MainBaseWebcam;
 import org.firstinspires.ftc.teamcode.SkyStone.OpModes.Autonomous.Competition.SkystoneDetector;
 
@@ -47,7 +48,7 @@ public class Blue1Place1Deliver extends LinearOpMode {
 
     private CustomPhoneCameraSkyStone.SkyStonePosition position = CustomPhoneCameraSkyStone.SkyStonePosition.UNKNOWN;
     private SkystoneDetector detector;
-    public MainBaseWebcam base;
+    public MainBase base;
 
     public int initialAngle;
 
@@ -60,7 +61,7 @@ public class Blue1Place1Deliver extends LinearOpMode {
     @Override
     public void runOpMode(){
 
-        base = new MainBaseWebcam(hardwareMap,telemetry,this);
+        base = new MainBase(hardwareMap,telemetry,this);
         base.init();
 
         detector = new SkystoneDetector(this, true, false);
@@ -95,7 +96,6 @@ public class Blue1Place1Deliver extends LinearOpMode {
         initialAngle = base.gyro.gyro.getIntegratedZValue();
 
         position = detector.getDecision();
-        detector.stopStreaming();
 
         telemetry.addData("position is ", position);
         telemetry.update();
@@ -169,6 +169,7 @@ public class Blue1Place1Deliver extends LinearOpMode {
         writeAngle();
 
         logWriter.close();
+        detector.stopStreaming();
     }
 
     private void writeAngle(){
@@ -261,21 +262,19 @@ public class Blue1Place1Deliver extends LinearOpMode {
     }
 
     public void grabStone(){
-        base.arms.leftClampInPower(1);
+        base.arms.clampLeftClamp();
         sleep(350);
     }
 
     public void releaseStone(){
-        base.arms.leftClampOutPower(1);
-        sleep(350);
-        base.arms.leftClampOutPower(0);
+        base.arms.openLeftClamp();
     }
 
     public void getFirstStoneLeft(){
         lowerArm();
 
         //drives back and left after seeing stones
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -8, -27, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -8, -24, initialAngle);
         log("left to first stone with encoders");
 
         straightenOut();
@@ -299,7 +298,7 @@ public class Blue1Place1Deliver extends LinearOpMode {
         log("left straighten out after strafing right with first stone");
 
         //drive to other zone
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -51, 5, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -60, -5, initialAngle);
         log("left ready to deposit stone");
 
         lowerArm();
@@ -313,12 +312,16 @@ public class Blue1Place1Deliver extends LinearOpMode {
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 5, 5, initialAngle);
         log("left drive forward after depositing first");
 
+        base.arms.shutLeftClamp();
+
         straightenOut();
         log("left straighten after strafing after depositing first");
 
         //drives to second stone
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 70, 0, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 80, 0, initialAngle);
         log("left to other zone second stone with encoders");
+
+        base.arms.openLeftClamp();
 
         lowerArm();
 
@@ -366,6 +369,9 @@ public class Blue1Place1Deliver extends LinearOpMode {
         releaseStone();
 
         raiseArm();
+
+        sleep(250);
+        base.arms.shutLeftClamp();
 
         //park
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 17, 0, base.gyro.gyro.getIntegratedZValue());
@@ -419,9 +425,13 @@ public class Blue1Place1Deliver extends LinearOpMode {
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED,5,5, initialAngle);
         log("small drive to right after delivering first stone");
 
+        base.arms.shutLeftClamp();
+
         //drives to second stone
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 80, 0, initialAngle);
         log("drove to second stone before lowering arm");
+
+        base.arms.openLeftClamp();
 
         lowerArm();
 
@@ -470,6 +480,9 @@ public class Blue1Place1Deliver extends LinearOpMode {
         releaseStone();
 
         raiseArm();
+
+        sleep(250);
+        base.arms.shutLeftClamp();
 
         //park
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 12, 0, base.gyro.gyro.getIntegratedZValue());
@@ -522,9 +535,13 @@ public class Blue1Place1Deliver extends LinearOpMode {
         straightenOut();
         log("straighten out after driving right after depositing first stone");
 
+        base.arms.shutLeftClamp();
+
         //drives to second stone
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 72.2, 0, initialAngle);
         log("drive forward to second stone encoders");
+
+        base.arms.openLeftClamp();
 
         lowerArm();
 
@@ -572,6 +589,9 @@ public class Blue1Place1Deliver extends LinearOpMode {
         releaseStone();
 
         raiseArm();
+
+        sleep(250);
+        base.arms.shutLeftClamp();
 
         //park
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 13, 0, base.gyro.gyro.getIntegratedZValue());

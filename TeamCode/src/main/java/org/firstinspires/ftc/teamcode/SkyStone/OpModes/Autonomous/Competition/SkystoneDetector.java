@@ -21,19 +21,19 @@ public class SkystoneDetector {
 
     CustomPipeline pipeline;
 
-    private final Point BLUE_LEFT_TL = new Point(20,120);
-    private final Point BLUE_LEFT_BR = new Point(70, 160);
-    private final Point BLUE_MIDDLE_TL = new Point(90, 120);
-    private final Point BLUE_MIDDLE_BR = new Point(140,  160);
-    private final Point BLUE_RIGHT_TL = new Point(160, 120);
-    private final Point BLUE_RIGHT_BR = new Point(210, 160);
+    private final Point BLUE_LEFT_TL = new Point(90,110);
+    private final Point BLUE_LEFT_BR = new Point(140, 140);
+    private final Point BLUE_MIDDLE_TL = new Point(185, 110);
+    private final Point BLUE_MIDDLE_BR = new Point(235,  140);
+    private final Point BLUE_RIGHT_TL = new Point(265, 110);
+    private final Point BLUE_RIGHT_BR = new Point(315, 140);
 
-    private final Point RED_LEFT_TL = new Point(10,155);
-    private final Point RED_LEFT_BR = new Point(70, 185);
-    private final Point RED_MIDDLE_TL = new Point(90, 155);
-    private final Point RED_MIDDLE_BR = new Point(150,  185);
-    private final Point RED_RIGHT_TL = new Point(170, 145);
-    private final Point RED_RIGHT_BR = new Point(230, 175);
+    private final Point RED_LEFT_TL = new Point(0,135);
+    private final Point RED_LEFT_BR = new Point(50, 165);
+    private final Point RED_MIDDLE_TL = new Point(62, 140);
+    private final Point RED_MIDDLE_BR = new Point(125,  170);
+    private final Point RED_RIGHT_TL = new Point(155, 140);
+    private final Point RED_RIGHT_BR = new Point(215, 170);
 
     private Point leftTL;
     private Point leftBR;
@@ -122,7 +122,7 @@ public class SkystoneDetector {
             Imgproc.rectangle(input, middleTL, middleBR, middleColor, thickness);
             Imgproc.rectangle(input, rightTL, rightBR, rightColor, thickness);
 
-            sendTelemetry();
+            //sendTelemetry();
 
             return input;
         }

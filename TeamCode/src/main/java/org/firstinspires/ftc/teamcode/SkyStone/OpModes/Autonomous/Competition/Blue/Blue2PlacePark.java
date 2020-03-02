@@ -20,7 +20,7 @@ public class Blue2PlacePark extends Blue1Place1Deliver{
         log("left straighten after strafe after grabbing second stone");
 
         //drives back to go to other zone
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -73, -5, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -93, -5, initialAngle);
         log("left depositing second stone");
 
         lowerArm();
@@ -33,11 +33,13 @@ public class Blue2PlacePark extends Blue1Place1Deliver{
     @Override
     public void leftPark(){
         //drive forward and right
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, 10, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 7, 7, initialAngle);
         log("left drive forward and right to park");
 
+        base.arms.shutLeftClamp();
+
         //parks
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 25, 0, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 45, 0, initialAngle);
         log("left park by driving forward");
     }
 
@@ -66,6 +68,8 @@ public class Blue2PlacePark extends Blue1Place1Deliver{
         //drive forward and right
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, 10, initialAngle);
         log("middle drive forward and right to park");
+
+        base.arms.shutLeftClamp();
 
         //parks
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 25, 0, initialAngle);
@@ -97,6 +101,8 @@ public class Blue2PlacePark extends Blue1Place1Deliver{
         //drive forward and right
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, 10, initialAngle);
         log("right drive forward and right");
+
+        base.arms.shutLeftClamp();
 
         //parks
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 25, 0, initialAngle);

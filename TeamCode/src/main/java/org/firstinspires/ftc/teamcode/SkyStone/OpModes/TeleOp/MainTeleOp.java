@@ -31,6 +31,9 @@ public class MainTeleOp extends LinearOpMode {
     private boolean gamepad2rightHeld = false;
     private boolean gamepad1leftBumperHeld = false;
     private boolean gamepad1rightBumperHeld = false;
+    private boolean gamepad1leftTriggerHeld = false;
+    private boolean gamepad1rightTriggerHeld = false;
+
 
     private static final int[] ENCODER_PLACING_POSITIONS = {-143, -756, -1231, -1745, -2235, -3016, -1785};
     private int towerLevel = 0;
@@ -58,8 +61,6 @@ public class MainTeleOp extends LinearOpMode {
         telemetry.addLine("All Systems Go");
         telemetry.addLine("May be the Force be with us");
         telemetry.update();
-
-        base.arms.rightArm.setPosition(0.1);
 
         setAngle();
 
@@ -138,12 +139,25 @@ public class MainTeleOp extends LinearOpMode {
             else{
                 gamepad1leftBumperHeld = false;
             }
-            if (gamepad1.left_trigger > 0.2){
-                base.arms.leftClampInPower(gamepad1.left_trigger);
+
+            if (gamepad1.left_trigger > 0.5){
+                if (! gamepad1leftTriggerHeld){
+                    gamepad1leftTriggerHeld = true;
+                    if (Math.abs(base.arms.leftClamp.getPosition() - AutoStoneArms.LEFT_CLAMP_OPEN_POSITION) < 0.1){
+                        base.arms.clampLeftClamp();
+                    }
+                    else if (Math.abs(base.arms.leftClamp.getPosition() - AutoStoneArms.LEFT_CLAMP_GRAB_POSITION) < 0.1){
+                        base.arms.shutLeftClamp();
+                    }
+                    else{
+                        base.arms.openLeftClamp();
+                    }
+                }
             }
             else{
-                base.arms.leftClampInPower(0);
+                gamepad1leftTriggerHeld = false;
             }
+
 
             if (gamepad1.right_bumper){
                 if (! gamepad1rightBumperHeld){
@@ -159,11 +173,26 @@ public class MainTeleOp extends LinearOpMode {
             else{
                 gamepad1rightBumperHeld = false;
             }
-            if (gamepad1.right_trigger > 0.2){
-                base.arms.rightClampInPower(gamepad1.right_trigger);
+
+            if (gamepad1.right_trigger > 0.5){
+                if (! gamepad1rightTriggerHeld){
+                    gamepad1rightTriggerHeld = true;
+                    if (Math.abs(base.arms.rightClamp.getPosition() - AutoStoneArms.RIGHT_CLAMP_OPEN_POSITION) < 0.1){
+                        telemetry.addLine("setting to clamp position");
+                        base.arms.clampRightClamp();
+                    }
+                    else if (Math.abs(base.arms.rightClamp.getPosition() - AutoStoneArms.RIGHT_CLAMP_GRAB_POSITION) < 0.1){
+                        telemetry.addLine("setting to shut position");
+                        base.arms.shutRightClamp();
+                    }
+                    else{
+                        telemetry.addLine("setting to open position");
+                        base.arms.openRightClamp();
+                    }
+                }
             }
             else{
-                base.arms.rightClampInPower(0);
+                gamepad1rightTriggerHeld = false;
             }
 
 
@@ -314,6 +343,9 @@ public class MainTeleOp extends LinearOpMode {
             telemetry.addLine();
             telemetry.addData("left arm position is " , base.arms.leftArm.getPosition());
             telemetry.addData("right arm position is ", base.arms.rightArm.getPosition());
+            telemetry.addLine();
+            telemetry.addData("left clamp position is " , base.arms.leftClamp.getPosition());
+            telemetry.addData("right clamp position is ", base.arms.rightClamp.getPosition());
 //            telemetry.addData("front right encoders are ", base.drivetrain.frontRight.getCurrentPosition());
 //            telemetry.addData("front left ", base.drivetrain.frontLeft.getCurrentPosition());
 //            telemetry.addData("back left ", base.drivetrain.backLeft.getCurrentPosition());
