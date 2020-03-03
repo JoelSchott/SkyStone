@@ -13,7 +13,7 @@ public class Red2PlaceFoundation extends Red2PlacePark {
     @Override
     public void rightPark(){
         //strafes into foundation
-        base.drivetrain.gyroEncoderDrive(0.3, 0, 5, initialAngle);
+        base.drivetrain.gyroEncoderDrive(0.3, 0, 1.5, initialAngle);
         log("drives flush to foundation");
 
         //grabs foundation
@@ -21,7 +21,7 @@ public class Red2PlaceFoundation extends Red2PlacePark {
         sleep(300);
 
         //strafes left and forward before turning
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, -5, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 15, -18, initialAngle);
         log("drives forward and left with foundation");
 
         //turns to place foundation
@@ -41,7 +41,7 @@ public class Red2PlaceFoundation extends Red2PlacePark {
     @Override
     public void middlePark(){
         //strafes into foundation
-        base.drivetrain.gyroEncoderDrive(0.3, 0, 5, initialAngle);
+        base.drivetrain.gyroEncoderDrive(0.3, 0, 1.5, initialAngle);
         log("drives flush to foundation");
 
         //grabs foundation
@@ -49,7 +49,7 @@ public class Red2PlaceFoundation extends Red2PlacePark {
         sleep(300);
 
         //strafes left and forward before turning
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, -5, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 15, -18, initialAngle);
         log("drives forward and left with foundation");
 
         //turns to place foundation
@@ -70,7 +70,7 @@ public class Red2PlaceFoundation extends Red2PlacePark {
     @Override
     public void leftPark(){
         //strafes into foundation
-        base.drivetrain.gyroEncoderDrive(0.3, 0, 5, initialAngle);
+        base.drivetrain.gyroEncoderDrive(0.3, 0, 1.5, initialAngle);
         log("drives flush to foundation");
 
         //grabs foundation
@@ -78,7 +78,7 @@ public class Red2PlaceFoundation extends Red2PlacePark {
         sleep(300);
 
         //strafes left and forward before turning
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, -5, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 15, -18, initialAngle);
         log("drives forward and left with foundation");
 
         //turns to place foundation

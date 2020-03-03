@@ -64,8 +64,12 @@ public class MainTeleOp extends LinearOpMode {
 
         setAngle();
 
+
         waitForStart();
 
+        base.arms.shutRightClamp();
+        base.arms.shutLeftClamp();
+        base.output.placeMarker();
 
         while (opModeIsActive()){
 
@@ -175,7 +179,11 @@ public class MainTeleOp extends LinearOpMode {
             }
 
             if (gamepad1.right_trigger > 0.5){
+                telemetry.addLine("trigger held");
+                telemetry.addLine("right clamp open position is " + AutoStoneArms.RIGHT_CLAMP_OPEN_POSITION);
+                telemetry.addLine("right clamp grab position is " + AutoStoneArms.RIGHT_CLAMP_GRAB_POSITION);
                 if (! gamepad1rightTriggerHeld){
+                    telemetry.addLine("trigger pressed");
                     gamepad1rightTriggerHeld = true;
                     if (Math.abs(base.arms.rightClamp.getPosition() - AutoStoneArms.RIGHT_CLAMP_OPEN_POSITION) < 0.1){
                         telemetry.addLine("setting to clamp position");

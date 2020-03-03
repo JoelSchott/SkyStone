@@ -23,6 +23,7 @@ public class Output extends RobotComponent {
         blockRotator = base.getMapper().mapServo("rotator", Servo.Direction.FORWARD);
         clamp = base.getMapper().mapServo("clamp", Servo.Direction.FORWARD);
         marker = base.getMapper().mapServo("marker", Servo.Direction.FORWARD);
+
     }
     public void stop(){
         lift.setPower(0);

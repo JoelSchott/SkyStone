@@ -22,7 +22,7 @@ public class Red2PlacePark extends Red1Place1Deliver{
         log("straighten out after driving left after collecting first stone");
 
         //drive to other zone
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -84,10, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -90,10, initialAngle);
         log("drive to foundation");
 
         lowerArmSleep();
@@ -35,13 +35,13 @@ public class Red2PlacePark extends Red1Place1Deliver{
     @Override
     public void rightPark(){
         //drives left
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, -10, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 7, -7, initialAngle);
         log("drive forward and left to park");
 
         base.arms.shutRightClamp();
 
         //parks
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 30, 0, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 36, 0, initialAngle);
         log("drives forward to park");
     }
 
@@ -57,7 +57,7 @@ public class Red2PlacePark extends Red1Place1Deliver{
         log("straighten out after driving left after collecting first stone");
 
         //drive to other zone
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -92,10, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -95,10, initialAngle);
         log("drive to foundation");
 
         lowerArmSleep();
@@ -70,13 +70,13 @@ public class Red2PlacePark extends Red1Place1Deliver{
     @Override
     public void middlePark(){
         //drives left
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, -10, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 7, -7, initialAngle);
         log("drive forward and left to park");
 
         base.arms.shutRightClamp();
 
         //parks
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 30, 0, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 36, 0, initialAngle);
         log("drives forward to park");
     }
 
@@ -105,13 +105,13 @@ public class Red2PlacePark extends Red1Place1Deliver{
     @Override
     public void leftPark(){
         //drives left
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 10, -10, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 7, -7, initialAngle);
         log("drives forward and left to park");
 
         base.arms.shutRightClamp();
 
         //parks
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 30, 0, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 36, 0, initialAngle);
         log("drives forward to park");
     }
 

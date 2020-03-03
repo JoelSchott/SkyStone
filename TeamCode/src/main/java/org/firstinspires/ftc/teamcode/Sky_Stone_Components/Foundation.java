@@ -21,7 +21,7 @@ public class Foundation extends RobotComponent {
         rightFoundationServo.setPower(power);
     }
     public void moveLeftServo(double power){
-        leftFoundationServo.setPower(power);
+        leftFoundationServo.setPower(-power);
     }
 
     public void stop(){
