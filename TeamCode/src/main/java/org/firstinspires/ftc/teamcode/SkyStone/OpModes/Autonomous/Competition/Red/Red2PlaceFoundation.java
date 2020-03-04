@@ -12,6 +12,7 @@ public class Red2PlaceFoundation extends Red2PlacePark {
 
     @Override
     public void rightPark(){
+
         //strafes into foundation
         base.drivetrain.gyroEncoderDrive(0.3, 0, 1.5, initialAngle);
         log("drives flush to foundation");
@@ -25,16 +26,23 @@ public class Red2PlaceFoundation extends Red2PlacePark {
         log("drives forward and left with foundation");
 
         //turns to place foundation
-        base.drivetrain.gyroTurn(0.1, 1, 90, 4);
+        base.drivetrain.gyroTurn(0.3, 0.4, 90, 4);
         log("turns to place foundation");
+
+        //strafe into wall
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, 5, base.gyro.gyro.getIntegratedZValue());
 
         //releases foundation
         base.foundation.moveRightServo(1);
         sleep(300);
         base.foundation.moveRightServo(0);
 
+        base.arms.shutRightClamp();
+
         //parks
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, -30, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -6, -6, base.gyro.gyro.getIntegratedZValue());
+
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, -30, base.gyro.gyro.getIntegratedZValue());
         log("parks");
     }
 
@@ -53,8 +61,11 @@ public class Red2PlaceFoundation extends Red2PlacePark {
         log("drives forward and left with foundation");
 
         //turns to place foundation
-        base.drivetrain.gyroTurn(0.1, 1, 90, 4);
+        base.drivetrain.gyroTurn(0.3, 0.4, 90, 4);
         log("turns to place foundation");
+
+        //strafe into wall
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, 5, base.gyro.gyro.getIntegratedZValue());
 
         //releases foundation
         base.foundation.moveRightServo(1);
@@ -62,7 +73,7 @@ public class Red2PlaceFoundation extends Red2PlacePark {
         base.foundation.moveRightServo(0);
 
         //parks
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, -30, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, -30, base.gyro.gyro.getIntegratedZValue());
         log("parks");
 
     }
@@ -82,8 +93,11 @@ public class Red2PlaceFoundation extends Red2PlacePark {
         log("drives forward and left with foundation");
 
         //turns to place foundation
-        base.drivetrain.gyroTurn(0.1, 1, 90, 4);
+        base.drivetrain.gyroTurn(0.3, 0.4, 90, 4);
         log("turns to place foundation");
+
+        //strafe into wall
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, 5, base.gyro.gyro.getIntegratedZValue());
 
         //releases foundation
         base.foundation.moveRightServo(1);
@@ -91,7 +105,7 @@ public class Red2PlaceFoundation extends Red2PlacePark {
         base.foundation.moveRightServo(0);
 
         //parks
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, -30, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, -30, base.gyro.gyro.getIntegratedZValue());
         log("parks");
 
     }

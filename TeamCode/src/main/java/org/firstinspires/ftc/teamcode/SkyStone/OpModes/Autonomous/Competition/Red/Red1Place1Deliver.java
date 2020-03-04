@@ -34,8 +34,8 @@ public class Red1Place1Deliver extends LinearOpMode {
     public static final double FAR_LEFT_DISTANCE_TO_WALL = 20.86;
     public static final double LEFT_SECOND_DISTANCE_TO_WALL = 1.32;
 
-    public static final double MIDDLE_FIRST_DISTANCE_TO_WALL = 27.7;
-    public static final double MIDDLE_SECOND_DISTANCE_TO_WALL = 8.2;
+    public static final double MIDDLE_FIRST_DISTANCE_TO_WALL = 28;
+    public static final double MIDDLE_SECOND_DISTANCE_TO_WALL = 9;
 
     public static final double RIGHT_FIRST_DISTANCE_TO_WALL = 36;
     public static final double RIGHT_SECOND_DISTANCE_TO_WALL = 16.1;
@@ -197,7 +197,9 @@ public class Red1Place1Deliver extends LinearOpMode {
     }
 
     public void straightenOut(){
-        base.drivetrain.gyroTurn(0.35, 0.8, 180, 2);
+        base.drivetrain.gyroTurn(0.35, 0.5, 180, 2);
+        telemetry.addLine("angle is " + base.gyro.heading());
+        telemetry.update();
     }
 
     public void log(String position){
@@ -214,7 +216,7 @@ public class Red1Place1Deliver extends LinearOpMode {
     public void frontRangeDriveToDistance(double distance){
         double error = Math.abs(base.frontRange.customDistanceInInches() - distance);
         double buffer = 0.8;
-        if (base.frontRange.distance(DistanceUnit.INCH) < 0 || error > 4){
+        if (base.frontRange.distance(DistanceUnit.INCH) < 0 || error > 8){
             return;
         }
         if (error > buffer){
@@ -236,7 +238,7 @@ public class Red1Place1Deliver extends LinearOpMode {
     public void leftRangeDriveToDistance(double distance){
         double error = Math.abs(base.leftRange.customDistanceInInches() - distance);
         double buffer = 0.8;
-        if (base.leftRange.distance(DistanceUnit.INCH) < 0 || error > 4){
+        if (base.leftRange.distance(DistanceUnit.INCH) < 0 || error > 8){
             return;
         }
         if (error > buffer){
@@ -278,7 +280,7 @@ public class Red1Place1Deliver extends LinearOpMode {
         lowerArm();
 
         //drives forward and right after seeing stones
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 5, 25.2, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 9, 25.2, initialAngle);
         log("next to first stone encoders");
 
         straightenOut();
@@ -306,7 +308,7 @@ public class Red1Place1Deliver extends LinearOpMode {
         log("straightens out before driving to foundation");
 
         //drive to other zone
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -67, 10, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -70, 10, initialAngle);
         log("drives near foundation");
 
         lowerArmSleep();
@@ -325,7 +327,7 @@ public class Red1Place1Deliver extends LinearOpMode {
 
         straightenOut();
 
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 77, 0, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 84, 0, initialAngle);
         log("drives forward to second stone");
 
         base.arms.openRightClamp();
@@ -335,7 +337,7 @@ public class Red1Place1Deliver extends LinearOpMode {
         straightenOut();
         log("straighten out after driving forward to second stone");
 
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 6, 6, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 9.5, 9.5, initialAngle);
         log("drives next to second stone encoders");
 
         straightenOut();
@@ -395,7 +397,7 @@ public class Red1Place1Deliver extends LinearOpMode {
         lowerArm();
 
         //strafes right next to the stones
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 0, 25.2, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 2.5, 25, initialAngle);
         log("encoders next to first stone");
 
         straightenOut();
@@ -423,7 +425,7 @@ public class Red1Place1Deliver extends LinearOpMode {
         log("straighten out before driving to foundation");
 
         //drive to other zone
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -62, 10, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -65, 10, initialAngle);
         log("drive to foundation");
 
         lowerArmSleep();
@@ -442,14 +444,14 @@ public class Red1Place1Deliver extends LinearOpMode {
 
         base.arms.shutRightClamp();
 
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 72, 0, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 80.5, 0, initialAngle);
         log("drive straight to second stone");
 
         base.arms.openRightClamp();
 
         lowerArm();
 
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 6, 6, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 9.5, 9.5, initialAngle);
         log("drive next to second stone encoders");
 
         straightenOut();
@@ -512,11 +514,11 @@ public class Red1Place1Deliver extends LinearOpMode {
         lowerArm();
 
         //drives back and right after seeing stones
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -3.5, 25.2, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -4, 25.2, initialAngle);
         log("drives next to first stone encoders");
 
-        straightenOut();
-        log("straightens out after near first stone encoders");
+//        straightenOut();
+//        log("straightens out after near first stone encoders");
 
         //drives to specific distance from both walls
         frontRangeDriveToDistance(RIGHT_FIRST_DISTANCE_TO_WALL);
@@ -539,7 +541,7 @@ public class Red1Place1Deliver extends LinearOpMode {
         log("straighten out after driving left after collecting first stone");
 
         //drive to other zone
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -55,12, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -60,10, initialAngle);
         log("drive to foundation");
 
         lowerArmSleep();
@@ -560,14 +562,14 @@ public class Red1Place1Deliver extends LinearOpMode {
         straightenOut();
         base.arms.shutRightClamp();
 
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED,  72, 0, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED,  77, 0, initialAngle);
         log("drives forward after depositing first stone");
 
         base.arms.openRightClamp();
 
         lowerArm();
 
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED,  6, 6, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED,  9.5, 9.5, initialAngle);
         log("drives next to second stone encoders");
 
         straightenOut();

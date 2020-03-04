@@ -20,10 +20,10 @@ public class Blue2PlacePark extends Blue1Place1Deliver{
         log("left straighten after strafe after grabbing second stone");
 
         //drives back to go to other zone
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -93, -5, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -90, -9, initialAngle);
         log("left depositing second stone");
 
-        lowerArm();
+        lowerArmSleep();
 
         releaseStone();
 
@@ -53,10 +53,10 @@ public class Blue2PlacePark extends Blue1Place1Deliver{
         log("middle straighten after strafe after grabbing second stone");
 
         //drives back to go to other zone
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -81, -5, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -95, -9, initialAngle);
         log("middle depositing second stone");
 
-        lowerArm();
+        lowerArmSleep();
 
         releaseStone();
 
@@ -86,10 +86,10 @@ public class Blue2PlacePark extends Blue1Place1Deliver{
         log("right straighten after strafe after grabbing second stone");
 
         //drives back to go to other zone
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -89, -5, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -100, -9, initialAngle);
         log("right depositing second stone");
 
-        lowerArm();
+        lowerArmSleep();
 
         releaseStone();
 

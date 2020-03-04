@@ -285,7 +285,7 @@ public class FourWheelMecanum extends RobotComponent {
         double theta = 30;
         double d = (2*3.1416/theta);
         double addition = (maxSpeed + minSpeed)/2.0;
-        while (absoluteError > 1 && runTime.seconds() < timeOut && base().getOpMode().opModeIsActive()){
+        while (absoluteError > 0 && runTime.seconds() < timeOut && base().getOpMode().opModeIsActive()){
             absoluteError = Math.abs(targetDegrees - getProcessedAngle());
             if (absoluteError > 180){
                 absoluteError = 360 - absoluteError;
@@ -562,7 +562,7 @@ public class FourWheelMecanum extends RobotComponent {
                             Math.abs(backRight.getCurrentPosition() - backRight.getTargetPosition());
             double sumInchesError = sumEncoderError / COUNTS_PER_INCH;
 
-            if (sumInchesError < 1.2){
+            if (sumInchesError < 0.5){
                 break;
             }
 //            else if (sumInchesError > 24){
