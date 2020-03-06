@@ -23,7 +23,7 @@ public class AutoStoneArms extends RobotComponent{
     public final static double RIGHT_CLAMP_SHUT_POSITION = 1;
 
     public final static double LEFT_CLAMP_OPEN_POSITION = 0;
-    public final static double LEFT_CLAMP_GRAB_POSITION = 0.7;
+    public final static double LEFT_CLAMP_GRAB_POSITION = 0.85;
     public final static double LEFT_CLAMP_SHUT_POSITION = 1;
 
     public AutoStoneArms(RobotBase base){

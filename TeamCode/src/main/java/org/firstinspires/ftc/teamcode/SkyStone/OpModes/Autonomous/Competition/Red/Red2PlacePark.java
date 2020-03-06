@@ -22,7 +22,7 @@ public class Red2PlacePark extends Red1Place1Deliver{
         log("straighten out after driving left after collecting first stone");
 
         //drive to other zone
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -90,10, initialAngle);
+        base.drivetrain.gyroEncoderDriveCoefficient(DRIVE_SPEED, -92,10, initialAngle);
         log("drive to foundation");
 
         lowerArmSleep();
@@ -57,7 +57,7 @@ public class Red2PlacePark extends Red1Place1Deliver{
         log("straighten out after driving left after collecting first stone");
 
         //drive to other zone
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -95,10, initialAngle);
+        base.drivetrain.gyroEncoderDriveCoefficient(DRIVE_SPEED, -98,11.5, initialAngle);
         log("drive to foundation");
 
         lowerArmSleep();
@@ -92,7 +92,7 @@ public class Red2PlacePark extends Red1Place1Deliver{
         log("straighten out after driving left after collecting first stone");
 
         //drive to other zone
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -100,10, initialAngle);
+        base.drivetrain.gyroEncoderDriveCoefficient(DRIVE_SPEED, -104,10.5, initialAngle);
         log("drive to foundation");
 
         lowerArmSleep();

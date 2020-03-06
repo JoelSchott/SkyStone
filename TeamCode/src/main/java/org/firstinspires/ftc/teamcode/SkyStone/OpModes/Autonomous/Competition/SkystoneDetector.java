@@ -21,12 +21,12 @@ public class SkystoneDetector {
 
     CustomPipeline pipeline;
 
-    private final Point BLUE_LEFT_TL = new Point(90,110);
-    private final Point BLUE_LEFT_BR = new Point(140, 140);
-    private final Point BLUE_MIDDLE_TL = new Point(185, 110);
-    private final Point BLUE_MIDDLE_BR = new Point(235,  140);
-    private final Point BLUE_RIGHT_TL = new Point(265, 110);
-    private final Point BLUE_RIGHT_BR = new Point(315, 140);
+    private final Point BLUE_LEFT_TL = new Point(90,90);
+    private final Point BLUE_LEFT_BR = new Point(140, 120);
+    private final Point BLUE_MIDDLE_TL = new Point(185, 90);
+    private final Point BLUE_MIDDLE_BR = new Point(235,  120);
+    private final Point BLUE_RIGHT_TL = new Point(265, 90);
+    private final Point BLUE_RIGHT_BR = new Point(315, 120);
 
     private final Point RED_LEFT_TL = new Point(0,135);
     private final Point RED_LEFT_BR = new Point(50, 165);

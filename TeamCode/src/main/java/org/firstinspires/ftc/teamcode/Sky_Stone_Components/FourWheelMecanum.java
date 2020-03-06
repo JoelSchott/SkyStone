@@ -310,9 +310,11 @@ public class FourWheelMecanum extends RobotComponent {
                 backRight.setPower(-power);
                 frontRight.setPower(-power);
             }
-
-
         }
+        frontRight.setPower(0);
+        frontLeft.setPower(0);
+        backRight.setPower(0);
+        backLeft.setPower(0);
     }
 
     public void driveTurn(double forward, double right, double targetDegrees, double minTurnSpeed, double maxTurnSpeed, boolean turnLeft){
@@ -629,6 +631,120 @@ public class FourWheelMecanum extends RobotComponent {
         setModes(DcMotor.RunMode.RUN_USING_ENCODER);
 
     }
+
+    public void gyroEncoderDriveCoefficient(double speed, double forwardInches, double rightInches, double angle){
+        setModes(DcMotor.RunMode.RUN_USING_ENCODER);
+        int frontLeftCounts = (int) ((forwardInches + (1.414 * rightInches)) * COUNTS_PER_INCH);
+        int frontRightCounts = (int) ((forwardInches - (1.414 * rightInches)) * COUNTS_PER_INCH);
+
+        int frontLeftTarget = frontLeft.getCurrentPosition() + frontLeftCounts;
+        int backRightTarget = backRight.getCurrentPosition() + frontLeftCounts;
+        int frontRightTarget= frontRight.getCurrentPosition() + frontRightCounts;
+        int backLeftTarget = backLeft.getCurrentPosition() + frontRightCounts;
+
+        frontLeft.setTargetPosition(frontLeftTarget);
+        backRight.setTargetPosition(backRightTarget);
+        frontRight.setTargetPosition(frontRightTarget);
+        backLeft.setTargetPosition(backLeftTarget);
+
+        setModes(DcMotor.RunMode.RUN_TO_POSITION);
+
+        speed = Range.clip(Math.abs(speed), 0.0,1.0);
+        frontLeft.setPower(speed);
+        frontRight.setPower(speed);
+        backLeft.setPower(speed);
+        backRight.setPower(speed);
+
+        int busyMotors = 4;
+        while (base.getOpMode().opModeIsActive() && busyMotors > 1){
+
+            double error = angle - gyro.gyro.getIntegratedZValue();
+            while (error > 180){
+                error -= 360;
+            }
+            while (error < -180){
+                error += 360;
+            }
+
+            double steer = Range.clip(error * 0.03, -1.0, 1.0);
+
+
+            double minusSteerSpeed = speed - steer;
+            double plusSteerSpeed = speed + steer;
+
+
+            double max = Math.max(Math.abs(minusSteerSpeed), Math.abs(plusSteerSpeed));
+            if (max > 1.0){
+                minusSteerSpeed /= max;
+                plusSteerSpeed /= max;
+            }
+
+            double sumEncoderError = Math.abs(frontLeft.getCurrentPosition() - frontLeft.getTargetPosition())+
+                    Math.abs(backLeft.getCurrentPosition() - backLeft.getTargetPosition()) +
+                    Math.abs(frontRight.getCurrentPosition() - frontRight.getTargetPosition()) +
+                    Math.abs(backRight.getCurrentPosition() - backRight.getTargetPosition());
+            double sumInchesError = sumEncoderError / COUNTS_PER_INCH;
+
+            if (sumInchesError < 0.5){
+                break;
+            }
+            else {
+                if (frontRight.getTargetPosition() > frontRight.getCurrentPosition()){
+                    frontRight.setPower(plusSteerSpeed);
+                }
+                else{
+                    frontRight.setPower(minusSteerSpeed);
+                }
+                if (backRight.getTargetPosition() > backRight.getCurrentPosition()){
+                    backRight.setPower(plusSteerSpeed);
+                }
+                else{
+                    backRight.setPower(minusSteerSpeed);
+                }
+
+                if (frontLeft.getTargetPosition() > frontLeft.getCurrentPosition()){
+                    frontLeft.setPower(minusSteerSpeed);
+                }
+                else{
+                    frontLeft.setPower(plusSteerSpeed);
+                }
+                if (backLeft.getTargetPosition() > backLeft.getCurrentPosition()){
+                    backLeft.setPower(minusSteerSpeed);
+                }
+                else{
+                    backLeft.setPower(plusSteerSpeed);
+                }
+            }
+
+            busyMotors = 0;
+            if (frontLeft.isBusy()){
+                busyMotors ++;
+            }
+            if (backLeft.isBusy()){
+                busyMotors++;
+            }
+            if (frontRight.isBusy()){
+                busyMotors++;
+            }
+            if(backRight.isBusy()){
+                busyMotors++;
+            }
+            // Display drive status for the driver.
+//            base.getTelemetry().addData("sum inches error is ", sumInchesError);
+//            base.getTelemetry().addData("steer is " , steer);
+//            base.getTelemetry().addData("Angle is ",  angle);
+//            base.getTelemetry().addData("Current is ", gyro.gyro.getIntegratedZValue());
+//            base.getTelemetry().addLine("front Left " + frontLeft.getPower());
+//            base.getTelemetry().addLine("front Right " + frontRight.getPower());
+//            base.getTelemetry().addLine("back Left " + backLeft.getPower());
+//            base.getTelemetry().addLine("back right " + backRight.getPower());
+//            base.getTelemetry().update();
+
+        }
+        stop();
+        setModes(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
+
 
 
     public void encoderDrive(double speed, double xInches, double yInches, double timeout){
