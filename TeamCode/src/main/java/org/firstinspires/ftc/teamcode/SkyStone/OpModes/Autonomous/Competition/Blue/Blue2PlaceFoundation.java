@@ -24,23 +24,16 @@ public class Blue2PlaceFoundation extends Blue2PlacePark {
         straightenOut();
 
         //drives forward and right before turning
-        base.drivetrain.gyroEncoderDriveCoefficient(DRIVE_SPEED, 0, 43, initialAngle);
+        base.drivetrain.gyroEncoderDriveCoefficient(DRIVE_SPEED, 0, 40, initialAngle);
         straightenOut();
 
         log("left drive forward and right with foundation");
-
-
 
         //releases foundation
         base.foundation.moveLeftServo(1);
         sleep(300);
         base.foundation.moveLeftServo(0);
 
-        base.arms.shutLeftClamp();
-
-        //parks
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 50, 0, base.gyro.gyro.getIntegratedZValue());
-        log("left park");
     }
 
     @Override
@@ -56,22 +49,15 @@ public class Blue2PlaceFoundation extends Blue2PlacePark {
         straightenOut();
 
         //drives forward and right before turning
-        base.drivetrain.gyroEncoderDriveCoefficient(DRIVE_SPEED, 0, 43, initialAngle);
+        base.drivetrain.gyroEncoderDriveCoefficient(DRIVE_SPEED, 0, 40, initialAngle);
         straightenOut();
         log("middle drive forward and right with foundation");
-
-
 
         //releases foundation
         base.foundation.moveLeftServo(1);
         sleep(300);
         base.foundation.moveLeftServo(0);
 
-        base.arms.shutLeftClamp();
-
-        //parks
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 50, 0, base.gyro.gyro.getIntegratedZValue());
-        log("middle park");
     }
 
     @Override
@@ -87,7 +73,7 @@ public class Blue2PlaceFoundation extends Blue2PlacePark {
         straightenOut();
 
         //drives forward and right before turning
-        base.drivetrain.gyroEncoderDriveCoefficient(DRIVE_SPEED, 0, 43, initialAngle);
+        base.drivetrain.gyroEncoderDriveCoefficient(DRIVE_SPEED, 0, 40, initialAngle);
         straightenOut();
         log("right drive forward and right");
 
@@ -96,10 +82,5 @@ public class Blue2PlaceFoundation extends Blue2PlacePark {
         sleep(300);
         base.foundation.moveLeftServo(0);
 
-        base.arms.shutLeftClamp();
-
-        //parks
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 50, 0, base.gyro.gyro.getIntegratedZValue());
-        log("right park");
     }
 }

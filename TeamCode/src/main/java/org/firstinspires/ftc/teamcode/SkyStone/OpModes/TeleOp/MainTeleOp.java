@@ -93,7 +93,7 @@ public class MainTeleOp extends LinearOpMode {
             double right = gamepad1.left_stick_x;
             double turn = gamepad1.right_stick_x;
 
-            double scale = 0.5;
+            double scale = 0.3;
             if (driveMode == DrivetrainMode.SLOW_MODE){
                 forward = forward * scale;
                 right = right * scale;
@@ -346,14 +346,14 @@ public class MainTeleOp extends LinearOpMode {
             telemetry.addLine();
             telemetry.addData("TOWER LEVEL IS ", towerLevel);
             telemetry.addLine();
-            telemetry.addData("front distance ", base.frontRange.customDistanceInInches());
-            telemetry.addData("left distance is ", base.leftRange.customDistanceInInches());
-            telemetry.addLine();
-            telemetry.addData("left arm position is " , base.arms.leftArm.getPosition());
-            telemetry.addData("right arm position is ", base.arms.rightArm.getPosition());
-            telemetry.addLine();
-            telemetry.addData("left clamp position is " , base.arms.leftClamp.getPosition());
-            telemetry.addData("right clamp position is ", base.arms.rightClamp.getPosition());
+//            telemetry.addData("front distance ", base.frontRange.customDistanceInInches());
+//            telemetry.addData("left distance is ", base.leftRange.customDistanceInInches());
+//            telemetry.addLine();
+//            telemetry.addData("left arm position is " , base.arms.leftArm.getPosition());
+//            telemetry.addData("right arm position is ", base.arms.rightArm.getPosition());
+//            telemetry.addLine();
+//            telemetry.addData("left clamp position is " , base.arms.leftClamp.getPosition());
+//            telemetry.addData("right clamp position is ", base.arms.rightClamp.getPosition());
 //            telemetry.addData("front right encoders are ", base.drivetrain.frontRight.getCurrentPosition());
 //            telemetry.addData("front left ", base.drivetrain.frontLeft.getCurrentPosition());
 //            telemetry.addData("back left ", base.drivetrain.backLeft.getCurrentPosition());

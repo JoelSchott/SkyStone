@@ -15,14 +15,14 @@ public class Red2PlacePark extends Red1Place1Deliver{
         straightenOut();
 
         //drive left to go to building zone
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -9, -9, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -7.5, -7.5, initialAngle);
         log("drive left after grabbing first stone");
 
         straightenOut();
         log("straighten out after driving left after collecting first stone");
 
         //drive to other zone
-        base.drivetrain.gyroEncoderDriveCoefficient(DRIVE_SPEED, -92,10, initialAngle);
+        base.drivetrain.gyroEncoderDriveCoefficient(DRIVE_SPEED, -92,9, initialAngle);
         log("drive to foundation");
 
         lowerArmSleep();
@@ -50,14 +50,14 @@ public class Red2PlacePark extends Red1Place1Deliver{
         straightenOut();
 
         //drive left to go to building zone
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -9, -9, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -7.5, -7.5, initialAngle);
         log("drive left after grabbing first stone");
 
         straightenOut();
         log("straighten out after driving left after collecting first stone");
 
         //drive to other zone
-        base.drivetrain.gyroEncoderDriveCoefficient(DRIVE_SPEED, -98,11.5, initialAngle);
+        base.drivetrain.gyroEncoderDriveCoefficient(DRIVE_SPEED, -98,10, initialAngle);
         log("drive to foundation");
 
         lowerArmSleep();
@@ -85,14 +85,14 @@ public class Red2PlacePark extends Red1Place1Deliver{
         straightenOut();
 
         //drive left to go to building zone
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -9, -9, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -7.75, -7.75, initialAngle);
         log("drive left after grabbing first stone");
 
         straightenOut();
         log("straighten out after driving left after collecting first stone");
 
         //drive to other zone
-        base.drivetrain.gyroEncoderDriveCoefficient(DRIVE_SPEED, -104,10.5, initialAngle);
+        base.drivetrain.gyroEncoderDriveCoefficient(DRIVE_SPEED, -104,9, initialAngle);
         log("drive to foundation");
 
         lowerArmSleep();

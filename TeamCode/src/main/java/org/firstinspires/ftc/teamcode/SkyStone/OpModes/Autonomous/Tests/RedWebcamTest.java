@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.SkyStone.OpModes.Autonomous.Competition.SkystoneDetector;
 
-@Autonomous(group = "Autonomous", name = "OpenCvPhoneExample")
-public class OpenCvPhoneExample extends LinearOpMode {
+@Autonomous(group = "Autonomous", name = "Red Webcam Test")
+public class RedWebcamTest extends LinearOpMode {
 
     SkystoneDetector detector;
 

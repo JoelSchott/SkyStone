@@ -51,7 +51,7 @@ public class BlueFoundationBridge extends LinearOpMode {
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -15, -5, initialAngle);
 
         //turns with foundation
-        base.drivetrain.gyroTurn(0.1, 0.5, 90, 5);
+        base.drivetrain.gyroTurn(0.1, 0.7, 90, 5);
 
         //places foundation in corner
         base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -2, 20, base.gyro.gyro.getIntegratedZValue());

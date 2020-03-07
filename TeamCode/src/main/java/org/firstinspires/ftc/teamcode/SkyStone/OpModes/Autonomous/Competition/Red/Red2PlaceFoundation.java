@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 @Autonomous(name = "Red 2 Place Foundation")
 public class Red2PlaceFoundation extends Red2PlacePark {
 
+    private final static double FOUNDATION_DISTANCE = 27.7;
+
     @Override
     public void runOpMode(){
         super.runOpMode();
@@ -14,7 +16,8 @@ public class Red2PlaceFoundation extends Red2PlacePark {
     public void rightPark(){
 
         //strafes into foundation
-        base.drivetrain.gyroEncoderDrive(0.3, 0, 1.5, initialAngle);
+        base.drivetrain.gyroEncoderDrive(0.3, 0, 3.5, initialAngle);
+        leftRangeDriveToDistance(FOUNDATION_DISTANCE);
         log("drives flush to foundation");
 
         //grabs foundation
@@ -25,8 +28,9 @@ public class Red2PlaceFoundation extends Red2PlacePark {
         straightenOut();
 
         //drives forward and right before turning
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -5, -5, initialAngle);
-        base.drivetrain.gyroEncoderDriveCoefficient(DRIVE_SPEED, 0, -35, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -13, -13, initialAngle);
+        base.drivetrain.gyroEncoderDriveBIGCoefficient(DRIVE_SPEED, 0, -37, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -5, 0 ,initialAngle);
         straightenOut();
 
         //releases foundation
@@ -34,17 +38,14 @@ public class Red2PlaceFoundation extends Red2PlacePark {
         sleep(300);
         base.foundation.moveRightServo(0);
 
-        base.arms.shutRightClamp();
-        //parks
 
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 40, 0, base.gyro.gyro.getIntegratedZValue());
-        log("parks");
     }
 
     @Override
     public void middlePark(){
         //strafes into foundation
-        base.drivetrain.gyroEncoderDrive(0.3, 0, 1.5, initialAngle);
+        base.drivetrain.gyroEncoderDrive(0.3, 0, 3.5, initialAngle);
+        leftRangeDriveToDistance(FOUNDATION_DISTANCE);
         log("drives flush to foundation");
 
         //grabs foundation
@@ -54,28 +55,28 @@ public class Red2PlaceFoundation extends Red2PlacePark {
         straightenOut();
 
         //drives forward and right before turning
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -5, -5, initialAngle);
-        base.drivetrain.gyroEncoderDriveCoefficient(DRIVE_SPEED, 0, -35, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -13, -13, initialAngle);
+        base.drivetrain.gyroEncoderDriveBIGCoefficient(DRIVE_SPEED, 0, -37, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -5, 0 ,initialAngle);
         straightenOut();
 
         //releases foundation
         base.foundation.moveRightServo(1);
         sleep(300);
         base.foundation.moveRightServo(0);
+        straightenOut();
 
-        base.arms.shutRightClamp();
 
-        //parks
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 40, 0, base.gyro.gyro.getIntegratedZValue());
-        log("parks");
 
     }
 
     @Override
     public void leftPark(){
         //strafes into foundation
-        base.drivetrain.gyroEncoderDrive(0.3, 0, 1.5, initialAngle);
+        base.drivetrain.gyroEncoderDrive(0.3, 0, 3.5, initialAngle);
+        leftRangeDriveToDistance(FOUNDATION_DISTANCE);
         log("drives flush to foundation");
+
 
         //grabs foundation
         base.foundation.moveRightServo(-1);
@@ -84,19 +85,15 @@ public class Red2PlaceFoundation extends Red2PlacePark {
         straightenOut();
 
         //drives forward and right before turning
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -5, -5, initialAngle);
-        base.drivetrain.gyroEncoderDriveCoefficient(DRIVE_SPEED, 0, -35, initialAngle);        straightenOut();
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -13, -13, initialAngle);
+        base.drivetrain.gyroEncoderDriveBIGCoefficient(DRIVE_SPEED, 0, -37, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -5, 0 ,initialAngle);
+        straightenOut();
 
         //releases foundation
         base.foundation.moveRightServo(1);
         sleep(300);
         base.foundation.moveRightServo(0);
-
-        base.arms.shutRightClamp();
-
-        //parks
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 40, 0, base.gyro.gyro.getIntegratedZValue());
-        log("parks");
 
     }
 }

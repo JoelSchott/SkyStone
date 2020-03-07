@@ -56,7 +56,7 @@ public class Output extends RobotComponent {
     }
     //This system moves the team marker clamper outwards to stack onto the block
     public void placeMarker(){
-        marker.setPosition(1.0);
+        marker.setPosition(0.8);
     }
     //This system moves the team marker clamper back inside the robot
     public void retractMarker(){

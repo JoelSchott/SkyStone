@@ -306,7 +306,7 @@ public class Blue1Place1Deliver extends LinearOpMode {
         log("left straighten out after strafing right with first stone");
 
         //drive to other zone
-        base.drivetrain.gyroEncoderDriveCoefficient(DRIVE_SPEED, -62, -7.4, initialAngle);
+        base.drivetrain.gyroEncoderDriveCoefficient(DRIVE_SPEED, -62, -8, initialAngle);
         log("left ready to deposit stone");
 
         lowerArmSleep();
@@ -317,7 +317,7 @@ public class Blue1Place1Deliver extends LinearOpMode {
     }
 
     public void getSecondStoneLeft(){
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 7, 7, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 7.5, 7.5, initialAngle);
         log("left drive forward after depositing first");
 
         base.arms.shutLeftClamp();
@@ -415,7 +415,7 @@ public class Blue1Place1Deliver extends LinearOpMode {
         log("straighten out after strafe right after first stone");
 
         //drive to other zone
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -70, -8, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, -68, -8, initialAngle);
         log("drove to foundation with first stone");
 
         lowerArmSleep();
@@ -427,10 +427,10 @@ public class Blue1Place1Deliver extends LinearOpMode {
 
     public void getSecondStoneMiddle(){
         straightenOut();
-        log("straighten out after delivering fisrt stone");
+        log("straighten out after delivering first stone");
 
         //strafes right towards wall
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED,6,6, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED,10,10, initialAngle);
         log("small drive to right after delivering first stone");
 
         base.arms.shutLeftClamp();
@@ -443,7 +443,7 @@ public class Blue1Place1Deliver extends LinearOpMode {
 
         lowerArm();
 
-        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 7.5, -7.5, initialAngle);
+        base.drivetrain.gyroEncoderDrive(DRIVE_SPEED, 6.25, -6.25, initialAngle);
         log("near second stone with encoders");
 
         straightenOut();
